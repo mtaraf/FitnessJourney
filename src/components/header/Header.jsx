@@ -1,7 +1,7 @@
 import styles from "../../css/header/header.module.css";
 import { Row, Col, Container, Button, Image } from "react-bootstrap";
 import hamburgerMenuImage from "../../assets/hamburgerMenu.png";
-import icon from "../../assets/mainIcon.jpg";
+import icon from "../../assets/mainicon.jpg";
 import SignInButton from "./SignInButton";
 
 export default function Header({ setSideBar, current }) {

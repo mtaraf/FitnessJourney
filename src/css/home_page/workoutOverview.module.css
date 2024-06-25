@@ -1,0 +1,23 @@
+.card {
+  width: 100%;
+  margin: 10px 0px;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 2em;
+}
+
+.subTitle {
+  font-weight: 500;
+  font-size: 1.5em;
+  text-decoration: underline;
+  margin: 10px 0px;
+}
+
+.details {
+  margin: 5px 0px;
+}
+
+.currentWorkout {
+}

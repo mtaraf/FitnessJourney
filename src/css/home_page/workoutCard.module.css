@@ -1,0 +1,15 @@
+.title {
+  font-weight: bold;
+  font-size: larger;
+}
+
+.subTitle {
+  font-weight: 500;
+  font-size: large;
+}
+
+.card {
+  cursor: pointer;
+  margin: 10px 10px;
+  width: 150px;
+}
