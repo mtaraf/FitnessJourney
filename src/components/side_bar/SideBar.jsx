@@ -16,7 +16,7 @@ import cardio from "../../assets/cardio.png";
 import diet from "../../assets/diet.png";
 import SideBarIcon from "./SideBarIcon";
 
-export default function SideBar({ sideBar }) {
+export default function SideBar({ sideBar, setCurrent }) {
   const alertClicked = () => {
     alert("You clicked the third ListGroupItem");
   };
@@ -38,10 +38,14 @@ export default function SideBar({ sideBar }) {
         </ListGroup>
       ) : (
         <div>
-          <SideBarIcon image={homeIcon} title="Home" />
-          <SideBarIcon image={plan} title="Workout Plan" />
-          <SideBarIcon image={cardio} title="Cardio" />
-          <SideBarIcon image={diet} title="Nutrition" />
+          <SideBarIcon image={homeIcon} title="Home" setCurrent={setCurrent} />
+          <SideBarIcon
+            image={plan}
+            title="Workout Plan"
+            setCurrent={setCurrent}
+          />
+          <SideBarIcon image={cardio} title="Cardio" setCurrent={setCurrent} />
+          <SideBarIcon image={diet} title="Nutrition" setCurrent={setCurrent} />
         </div>
       )}
     </div>

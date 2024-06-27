@@ -1,0 +1,10 @@
+.card {
+  margin: 0;
+  width: 49%;
+  margin-right: 2%;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 2em;
+}

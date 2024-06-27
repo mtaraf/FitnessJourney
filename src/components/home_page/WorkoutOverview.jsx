@@ -21,9 +21,9 @@ export default function WorkoutOverview({
       <Card>
         <Container fluid>
           <Row>
-            <Col sm={3} class="no-gutters">
+            <Col sm={3}>
               <div className={styles.currentWorkout}>
-                <div className={styles.title}>Today's Workout</div>
+                <div className={styles.title}>Weight Lifting</div>
                 <div className={styles.subTitle}>{workoutTitle}</div>
                 <div>
                   {workoutDetails.map((detail) => (
@@ -32,7 +32,7 @@ export default function WorkoutOverview({
                 </div>
               </div>
             </Col>
-            <Col sm={9} class="no-gutters">
+            <Col sm={9}>
               <div className={styles.title}>Weekly Progress</div>
               <div>
                 <ProgressBar

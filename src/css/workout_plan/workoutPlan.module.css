@@ -1,0 +1,25 @@
+.form {
+  margin: 0 10px;
+}
+
+.titleGroup {
+  margin-bottom: 20px;
+}
+
+.overviewTitle {
+  font-size: 1.5em;
+}
+
+.overview {
+}
+
+.button {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  background-color: rgb(87, 83, 83);
+  border: none;
+}
+
+.button:hover {
+  background-color: rgb(87, 83, 83);
+}
