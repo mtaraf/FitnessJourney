@@ -1,7 +1,20 @@
+/* Content */
 .container {
   background-color: #312d2d;
 }
 
+.heading {
+  display: flex;
+}
+
+.title {
+  font-weight: bold;
+  font-size: 2em;
+  color: whitesmoke;
+  margin: auto 10px;
+}
+
+/* Button */
 .hamburgerButton {
   width: 50px;
   height: 50px;
@@ -21,22 +34,13 @@
   background-color: #3b3838;
 }
 
+/* Image */
 .image {
   max-width: 100%;
   height: auto;
 }
 
-.heading {
-  display: flex;
-}
-
-.title {
-  font-weight: bold;
-  font-size: 2em;
-  color: whitesmoke;
-  margin: auto 10px;
-}
-
+/* Icon */
 .icon {
   width: 60px;
   height: 60px;

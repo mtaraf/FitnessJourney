@@ -1,22 +1,24 @@
-/* Row */
-.row {
-  display: flex;
-}
-
 /* Card */
-.workoutsCard {
-  margin-top: 10px;
+.card {
+  margin: 10px;
   height: 100%;
   width: 50%;
 }
 
-.container {
+.content {
   display: flex;
 }
 
 .details {
-  margin: 0 20px;
   width: 100%;
+}
+
+/* Title */
+.title {
+  font-size: 2em;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #312d2d;
 }
 
 /* List */
@@ -41,5 +43,21 @@
 }
 
 .list {
-  width: 15%;
+  width: 20%;
+}
+
+/* Button */
+.button {
+  float: right;
+  cursor: pointer;
+  border: none;
+  background-color: #312d2d;
+}
+
+.button:focus {
+  outline: none;
+}
+
+.button:hover {
+  background-color: #3b3838;
 }

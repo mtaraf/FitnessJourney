@@ -1,7 +1,6 @@
-.image {
-  margin: 5px 0px;
-  width: 40px;
-  height: auto;
+/* Content */
+.container {
+  margin: 10px 0px;
 }
 
 .title {
@@ -11,6 +10,7 @@
   color: whitesmoke;
 }
 
+/* Button */
 .button {
   width: 70px;
   border-radius: 10px;
@@ -29,6 +29,9 @@
   outline: none;
 }
 
-.container {
-  margin: 10px 0px;
+/* Button */
+.image {
+  margin: 5px 0px;
+  width: 40px;
+  height: auto;
 }

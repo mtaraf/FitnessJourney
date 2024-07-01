@@ -1,0 +1,27 @@
+/* Form */
+.form {
+  margin: 0 10px;
+}
+
+.titleGroup {
+  margin-bottom: 20px;
+}
+
+.overviewTitle {
+  font-size: 1.5em;
+}
+
+.overview {
+}
+
+/* Buttons */
+.button {
+  margin-top: 5px;
+  margin-bottom: 20px;
+  background-color: #312d2d;
+  border: none;
+}
+
+.button:hover {
+  background-color: #3b3838;
+}

@@ -21,7 +21,7 @@ function App() {
           <Col xs="auto">
             <SideBar sideBar={sideBar} setCurrent={setCurrentPage}></SideBar>
           </Col>
-          <Col xs={10}>{currentPage == 0 ? <WorkoutPlan /> : <Home />}</Col>
+          <Col>{currentPage == 0 ? <WorkoutPlan /> : <Home />}</Col>
         </Row>
       </Container>
     </>

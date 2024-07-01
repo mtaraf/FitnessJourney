@@ -7,93 +7,92 @@ import {
   Modal,
   Button,
   Offcanvas,
+  ListGroup,
+  Container,
+  Row,
+  Col,
 } from "react-bootstrap";
 import styles from "../../css/workout_plan/workoutPlan.module.css";
+import WorkoutDetails from "./WorkoutDetails";
+import WorkoutForm from "./WorkoutForm";
+import WeeklyPlan from "./WeeklyPlan";
 
 export default function WorkoutPlan() {
-  const [workout, setWorkout] = useState({ name: "", sets: 0, reps: "" });
+  const [workoutList, setWorkoutList] = useState([]);
+  const [show, setShow] = useState(false);
+  const [active, setActive] = useState(0);
 
-  let workouts = [];
+  const handleShow = () => {
+    setShow(true);
+  };
 
-  function addWorkout(e) {
-    e.preventDefault();
-    console.log(e.target.form[3].value);
-    setWorkout({
-      name: e.target.form[1].value,
-      sets: e.target.form[2].value,
-      reps: e.target.form[3].value,
-    });
-    workouts.push(workout);
-    console.log(workouts);
-  }
+  const handleClose = () => {
+    setShow(false);
+  };
+
+  const displayDetails = (index) => {
+    setActive(index);
+  };
 
   return (
-    <>
-      <Card>
-        <Tabs
-          defaultActiveKey="+"
-          id="uncontrolled-tab-example"
-          className="mb-3"
-        >
-          <Tab eventKey="chest" title="Chest"></Tab>
-          <Tab eventKey="profile" title="Profile">
-            Tab content for Profile
-          </Tab>
-          <Tab eventKey="addTab" title="+">
-            <div>
-              <Form className={styles.form}>
-                <Form.Group
-                  className={styles.titleGroup}
-                  controlId="workoutName"
-                >
-                  <Form.Label>Workout Name</Form.Label>
-                  <Form.Control type="email" placeholder="Workout name" />
-                </Form.Group>
+    <div className={styles.row}>
+      <Card className={styles.workoutsCard}>
+        <div className={styles.container}>
+          <ListGroup className={styles.list}>
+            {/* Displays all workouts created */}
+            {workoutList.map((obj, index) => (
+              <ListGroup.Item
+                action
+                className={styles.listItem}
+                onClick={() => displayDetails(index)}
+                key={obj.title}
+              >
+                {obj.title}
+              </ListGroup.Item>
+            ))}
 
-                <Form.Group className="mb-3" controlId="exercises">
-                  <Form.Label>Exercises</Form.Label>
-                  <Form.Control
-                    type="email"
-                    placeholder="Exercise Name"
-                    name="exerciseName"
-                  />
-                  <br />
-                  <Form.Control type="text" placeholder="Sets" />
-                  <br />
-                  <Form.Control type="text" placeholder="Reps" name="reps" />
-                </Form.Group>
+            <ListGroup.Item
+              action
+              onClick={handleShow}
+              className={styles.listItem}
+              key="add"
+            >
+              Add Workout
+            </ListGroup.Item>
+          </ListGroup>
 
-                <Button
-                  variant="primary"
-                  className={styles.button}
-                  onClick={(e) => addWorkout(e)}
-                >
-                  Add to Workout
-                </Button>
-                <br />
-
-                <Form.Text className={styles.overview}>
-                  <div className={styles.overviewTitle}>Overview</div>
-                  <hr />
-                  {workouts.map((obj) => (
-                    <div>hi</div>
-                  ))}
-                </Form.Text>
-
-                <br />
-
-                <Button
-                  variant="primary"
-                  type="submit"
-                  className={styles.button}
-                >
-                  Add
-                </Button>
-              </Form>
-            </div>
-          </Tab>
-        </Tabs>
+          {/* Displays workout details for active workout*/}
+          <div className={styles.details}>
+            {workoutList.length === 0 ? (
+              <WorkoutDetails title="Add New Workout" />
+            ) : (
+              <WorkoutDetails title={workoutList[active].title} />
+            )}
+          </div>
+        </div>
       </Card>
-    </>
+
+      {/* Add Form to Offcanvas */}
+      <Offcanvas
+        show={show}
+        onHide={handleClose}
+        backdrop="false"
+        placement="start"
+      >
+        <Offcanvas.Header closeButton>
+          <Offcanvas.Title>Add Workout</Offcanvas.Title>
+        </Offcanvas.Header>
+        <Offcanvas.Body>
+          <WorkoutForm
+            workoutList={workoutList}
+            setWorkoutList={setWorkoutList}
+            setShow={setShow}
+            setActive={setActive}
+          />
+        </Offcanvas.Body>
+      </Offcanvas>
+
+      <WeeklyPlan />
+    </div>
   );
 }
