@@ -2,3 +2,20 @@
 .container {
   text-align: center;
 }
+
+.title {
+  font-size: 2em;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #312d2d;
+}
+
+/* Table */
+.table {
+  margin-top: 20px;
+}
+
+.table th {
+  background-color: #312d2d;
+  color: whitesmoke;
+}

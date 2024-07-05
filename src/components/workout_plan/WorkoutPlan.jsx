@@ -66,7 +66,10 @@ export default function WorkoutPlan() {
             {workoutList.length === 0 ? (
               <WorkoutDetails title="Add New Workout" />
             ) : (
-              <WorkoutDetails title={workoutList[active].title} />
+              <WorkoutDetails
+                title={workoutList[active].title}
+                details={workoutList[active].exercises}
+              />
             )}
           </div>
         </div>

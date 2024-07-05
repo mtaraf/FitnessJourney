@@ -24,6 +24,7 @@ export default function WorkoutForm({
         name: e.target.form[1].value,
         sets: e.target.form[2].value,
         reps: e.target.form[3].value,
+        weight: "-",
       },
     ];
 
