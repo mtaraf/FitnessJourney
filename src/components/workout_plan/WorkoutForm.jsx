@@ -10,12 +10,25 @@ export default function WorkoutForm({
 }) {
   const [workoutName, setWorkoutName] = useState("");
   const [exercises, setWorkouts] = useState([]);
+  const [validExercise, setValidExercise] = useState(true);
+  const [validWorkoutTitle, setValidWorkoutTitle] = useState(true);
+  const [validWorkoutExercises, setValidWorkoutExercises] = useState(true);
 
   // Adds exercises to workout overview
   // To-Do: add error checking, check if values are empty
   const addExercise = (e) => {
     e.preventDefault();
     console.log(e);
+
+    // Check if Exercise name, sets, and reps are filled out
+    if (
+      e.target.form[1].value === "" ||
+      e.target.form[2].value === "" ||
+      e.target.form[3].value === ""
+    ) {
+      setValidExercise(false);
+      return;
+    }
 
     // Use temporary array to set workouts state
     const tempAry = [
@@ -28,18 +41,36 @@ export default function WorkoutForm({
       },
     ];
 
-    setWorkoutName(e.target.form[0].value);
-
     // Empty Form Control Values
     e.target.form[1].value = "";
     e.target.form[2].value = "";
     e.target.form[3].value = "";
 
+    // Set Workout Title
+    setWorkoutName(e.target.form[0].value);
+
+    //sets Workouts
     setWorkouts(tempAry);
+
+    // resets error checking
+    setValidExercise(true);
   };
 
-  const addWorkout = () => {
-    console.log("Added Workout");
+  const addWorkout = (e) => {
+    // Set Workout Title
+    setWorkoutName(e.target.form[0].value);
+    console.log(workoutName);
+    console.log(e.target.form[0].value);
+
+    // Error checking
+    if (!workoutName) {
+      setValidWorkoutTitle(false);
+      return;
+    } else if (exercises.length === 0) {
+      setValidWorkoutExercises(false);
+      return;
+    }
+
     const newWorkout = { title: workoutName, exercises: exercises };
     const tempList = [...workoutList, newWorkout];
 
@@ -53,6 +84,10 @@ export default function WorkoutForm({
 
     // adds new workout to workout list
     setWorkoutList(tempList);
+
+    // resets error checking
+    setValidWorkoutTitle(true);
+    setValidWorkoutExercises(true);
   };
 
   return (
@@ -70,7 +105,14 @@ export default function WorkoutForm({
           <Form.Control type="text" placeholder="Sets" />
           <br />
           <Form.Control type="text" placeholder="Reps" name="reps" />
-          <Form.Text muted>Press button to add exercise to workout</Form.Text>
+          {/* Validation Instructions for the exercise form */}
+          {validExercise ? (
+            <Form.Text muted>Press button to add exercise to workout</Form.Text>
+          ) : (
+            <Form.Text className={styles.invalid}>
+              Please add all exercise details before adding to workout
+            </Form.Text>
+          )}
         </Form.Group>
 
         <Button
@@ -78,7 +120,7 @@ export default function WorkoutForm({
           className={styles.button}
           onClick={(e) => addExercise(e)}
         >
-          Add to Workout
+          Add Exercise
         </Button>
         <br />
 
@@ -94,11 +136,22 @@ export default function WorkoutForm({
         </Form.Text>
 
         <br />
-
+        {/* Validation Instructions for the entire form */}
+        {!validWorkoutTitle ? (
+          <Form.Text className={styles.invalid}>
+            Please add a workout title
+          </Form.Text>
+        ) : !validWorkoutExercises ? (
+          <Form.Text className={styles.invalid}>
+            Please add atleast one exercise to workout
+          </Form.Text>
+        ) : (
+          ""
+        )}
         <Button
           variant="primary"
           className={styles.button}
-          onClick={() => addWorkout()}
+          onClick={(e) => addWorkout(e)}
         >
           Add Workout
         </Button>

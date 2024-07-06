@@ -15,8 +15,16 @@
 }
 
 .details {
-  margin: 0 20px;
+  margin: 10px 20px;
   width: 100%;
+}
+
+.title {
+  font-size: 2em;
+  font-weight: 600;
+  text-align: center;
+  border-bottom: 1px solid #312d2d;
+  text-align: center;
 }
 
 /* List */
@@ -42,4 +50,5 @@
 
 .list {
   width: 15%;
+  margin: 10px 0;
 }

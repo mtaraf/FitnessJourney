@@ -4,9 +4,8 @@ import styles from "../../css/workout_plan/workoutDetails.module.css";
 export default function WorkoutDetails({ title, details }) {
   return (
     <div className={styles.container}>
-      <div className={styles.title}>{title}</div>
       <div>
-        {title !== "Add New Workout" ? (
+        {title !== "Click Button to Add Workout" ? (
           <Table striped bordered hover className={styles.table}>
             <thead>
               <tr>

@@ -37,6 +37,13 @@ export default function WorkoutPlan() {
   return (
     <div className={styles.row}>
       <Card className={styles.workoutsCard}>
+        {/* Title */}
+        <div className={styles.title}>
+          {workoutList.length === 0
+            ? "Click Button to Add Workout"
+            : workoutList[active].title}
+        </div>
+
         <div className={styles.container}>
           <ListGroup className={styles.list}>
             {/* Displays all workouts created */}
@@ -61,16 +68,18 @@ export default function WorkoutPlan() {
             </ListGroup.Item>
           </ListGroup>
 
-          {/* Displays workout details for active workout*/}
           <div className={styles.details}>
-            {workoutList.length === 0 ? (
-              <WorkoutDetails title="Add New Workout" />
-            ) : (
-              <WorkoutDetails
-                title={workoutList[active].title}
-                details={workoutList[active].exercises}
-              />
-            )}
+            {/* Displays workout details for active workout*/}
+            <div>
+              {workoutList.length === 0 ? (
+                <WorkoutDetails title="Click Button to Add Workout" />
+              ) : (
+                <WorkoutDetails
+                  title={workoutList[active].title}
+                  details={workoutList[active].exercises}
+                />
+              )}
+            </div>
           </div>
         </div>
       </Card>

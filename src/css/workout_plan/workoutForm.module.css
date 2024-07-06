@@ -11,7 +11,9 @@
   font-size: 1.5em;
 }
 
-.overview {
+.invalid {
+  color: rgb(158, 23, 23);
+  display: block;
 }
 
 /* Buttons */
