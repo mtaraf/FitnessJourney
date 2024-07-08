@@ -3,6 +3,7 @@ import { Row, Col, Container, Button, Image } from "react-bootstrap";
 import hamburgerMenuImage from "../../assets/hamburgerMenu.png";
 import icon from "../../assets/mainicon.jpg";
 import SignInButton from "./SignInButton";
+import { useState } from "react";
 
 export default function Header({ setSideBar, current }) {
   return (

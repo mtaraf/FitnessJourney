@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const Product = require("./models/product.model.js");
 const router = require("./routes/product.route.js");
+const usersRouter = require("./routes/users.route.js");
 
 // middle-ware
 app.use(express.json());
@@ -16,11 +17,15 @@ app.use(function (req, res, next) {
     "GET, POST, OPTIONS, PUT, PATCH, DELETE"
   );
 
+  res.setHeader("Access-Control-Allow-Headers", "*");
+
   next();
 });
 
 // routes
 app.use("/api/products", router);
+
+app.use("/api/users", usersRouter);
 
 // app.get("/", (req, res) => {
 //   res.json({ username: "default" });

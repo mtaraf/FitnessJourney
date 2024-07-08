@@ -10,6 +10,7 @@ import WorkoutPlan from "./components/workout_plan/WorkoutPlan";
 function App() {
   const [sideBar, setSideBar] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
+  const [user, setUser] = useState();
 
   return (
     <>

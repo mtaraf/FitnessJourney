@@ -1,0 +1,16 @@
+/* Modal */
+.modal {
+  background-color: rgb(196, 193, 193);
+}
+
+/* Form */
+.button {
+  margin: 15px 0;
+  background-color: #312d2d;
+  display: block;
+  width: 100%;
+}
+
+.group {
+  margin: 10px 0;
+}
