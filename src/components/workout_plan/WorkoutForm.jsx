@@ -7,12 +7,16 @@ export default function WorkoutForm({
   setWorkoutList,
   setShow,
   setActive,
+  user,
 }) {
   const [workoutName, setWorkoutName] = useState("");
   const [exercises, setWorkouts] = useState([]);
   const [validExercise, setValidExercise] = useState(true);
   const [validWorkoutTitle, setValidWorkoutTitle] = useState(true);
   const [validWorkoutExercises, setValidWorkoutExercises] = useState(true);
+
+  // TO-DO: Put this in ENV file
+  const USERS_API_URL = "http://localhost:5000/api/users";
 
   // Adds exercises to workout overview
   // To-Do: add error checking, check if values are empty
@@ -56,6 +60,7 @@ export default function WorkoutForm({
     setValidExercise(true);
   };
 
+  // Adds workout to workoutList and user database entry
   const addWorkout = (e) => {
     // Set Workout Title
     setWorkoutName(e.target.form[0].value);
@@ -85,9 +90,27 @@ export default function WorkoutForm({
     // adds new workout to workout list
     setWorkoutList(tempList);
 
+    // updates user database with new workout
+    updateUserWorkouts(tempList);
+
     // resets error checking
     setValidWorkoutTitle(true);
     setValidWorkoutExercises(true);
+  };
+
+  const updateUserWorkouts = async (newList) => {
+    const updatedWorkouts = { workouts: newList };
+    try {
+      const response = await fetch(`${USERS_API_URL}/${user.username}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedWorkouts),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -127,7 +150,6 @@ export default function WorkoutForm({
         <Form.Text className={styles.overview}>
           <div className={styles.overviewTitle}>Overview</div>
           <hr />
-          <div>{workoutName}</div>
           {exercises.map((obj) => (
             <div key={obj.name}>
               {obj.name}: {obj.sets} x {obj.reps}

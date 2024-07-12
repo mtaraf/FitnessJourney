@@ -24,24 +24,13 @@ export default function WeeklyPlan() {
 
     // Removes leading / if needed
     tempCurrentSunday.charAt(3) === "/"
-      ? currentSunday.toLocaleDateString().substring(0, 3)
+      ? setSunday(currentSunday.toLocaleDateString().substring(0, 3))
       : setSunday(tempCurrentSunday);
 
     tempEndOfWeek.charAt(3) === "/"
       ? setEndOfWeek(endOfWeekDate.toLocaleDateString().substring(0, 3))
-      : setEndOfWeek(setEndOfWeek(tempEndOfWeek));
+      : setEndOfWeek(tempEndOfWeek);
   });
-
-  // Node APIs
-
-  // useEffect(() => {
-  //   async function fetchTest() {
-  //     const response = await fetch("http://localhost:5000/api");
-  //     const data = await response.json();
-  //     console.log(data.username);
-  //   }
-  //   fetchTest();
-  // }, []);
 
   return (
     <>

@@ -1,0 +1,27 @@
+.container {
+  float: right;
+  margin: 10px;
+}
+
+.title {
+  width: 100%;
+  text-align: center;
+}
+
+/* Button */
+.button {
+  background-color: #312d2d;
+  border: none;
+}
+
+.button:hover {
+  background-color: #443f3f;
+}
+
+/* Image */
+.image {
+  width: 30px;
+  height: auto;
+  padding: 0;
+  margin: 0;
+}

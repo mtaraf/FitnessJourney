@@ -10,19 +10,35 @@ import WorkoutPlan from "./components/workout_plan/WorkoutPlan";
 function App() {
   const [sideBar, setSideBar] = useState(false);
   const [currentPage, setCurrentPage] = useState(0);
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({
+    signedIn: false,
+    profilePicture: 0,
+    username: "",
+    workouts: [],
+  });
 
   return (
     <>
       <Container fluid>
         <Row>
-          <Header setSideBar={setSideBar} current={sideBar}></Header>
+          <Header
+            setSideBar={setSideBar}
+            current={sideBar}
+            user={user}
+            setUser={setUser}
+          ></Header>
         </Row>
         <Row>
           <Col xs="auto">
             <SideBar sideBar={sideBar} setCurrent={setCurrentPage}></SideBar>
           </Col>
-          <Col>{currentPage == 0 ? <WorkoutPlan /> : <Home />}</Col>
+          <Col>
+            {currentPage == 0 ? (
+              <WorkoutPlan user={user} setUser={setUser} />
+            ) : (
+              <Home />
+            )}
+          </Col>
         </Row>
       </Container>
     </>

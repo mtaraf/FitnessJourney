@@ -3,7 +3,7 @@ import styles from "../../css/header/signInButton.module.css";
 import { useState } from "react";
 import SignInModal from "./SignInModal";
 
-export default function SignInButton() {
+export default function SignInButton({ setUser }) {
   const [show, setShow] = useState(false);
 
   const handleClick = () => {
@@ -17,7 +17,7 @@ export default function SignInButton() {
         Sign-In
       </Button>
 
-      <SignInModal show={show} setShow={setShow} />
+      <SignInModal show={show} setShow={setShow} setUser={setUser} />
     </div>
   );
 }

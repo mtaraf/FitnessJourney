@@ -12,5 +12,6 @@ router.post("/", usersController.postUser);
 // Delete Requests
 
 // Update Requests
+router.put("/:username", usersController.updateUser);
 
 module.exports = router;

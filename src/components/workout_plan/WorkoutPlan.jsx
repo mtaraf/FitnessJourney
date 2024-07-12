@@ -1,23 +1,11 @@
-import { useState } from "react";
-import {
-  Card,
-  Form,
-  Tab,
-  Tabs,
-  Modal,
-  Button,
-  Offcanvas,
-  ListGroup,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Card, Offcanvas, ListGroup } from "react-bootstrap";
 import styles from "../../css/workout_plan/workoutPlan.module.css";
 import WorkoutDetails from "./WorkoutDetails";
 import WorkoutForm from "./WorkoutForm";
 import WeeklyPlan from "./WeeklyPlan";
 
-export default function WorkoutPlan() {
+export default function WorkoutPlan({ user, setUser }) {
   const [workoutList, setWorkoutList] = useState([]);
   const [show, setShow] = useState(false);
   const [active, setActive] = useState(0);
@@ -33,6 +21,16 @@ export default function WorkoutPlan() {
   const displayDetails = (index) => {
     setActive(index);
   };
+
+  // populate workout list based on user data
+  useEffect(() => {
+    if (user.signedIn) {
+      setWorkoutList(user.workouts);
+    } else {
+      setWorkoutList([]);
+    }
+    console.log("Check Sign In for workout list");
+  }, [user.signedIn]);
 
   return (
     <div className={styles.row}>
@@ -96,6 +94,7 @@ export default function WorkoutPlan() {
         </Offcanvas.Header>
         <Offcanvas.Body>
           <WorkoutForm
+            user={user}
             workoutList={workoutList}
             setWorkoutList={setWorkoutList}
             setShow={setShow}
