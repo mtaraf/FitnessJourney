@@ -1,13 +1,15 @@
 /* Row */
 .row {
-  display: flex;
+  display: block;
 }
 
 /* Card */
 .workoutsCard {
   margin-top: 10px;
+  min-height: 300px;
   height: 100%;
   width: 50%;
+  background-color: #f3f3f3;
 }
 
 .container {
@@ -33,12 +35,12 @@
   font-size: 0.8em;
   float: right;
   cursor: pointer;
-  background-color: #312d2d;
+  background-color: #413f3f;
   color: whitesmoke;
 }
 
 .listItem:hover {
-  background-color: #3b3838;
+  background-color: #636060;
   color: whitesmoke;
 }
 

@@ -1,0 +1,32 @@
+.item {
+  min-height: 100px;
+}
+
+.calendarTitle {
+  border-bottom: 1px solid #312d2d;
+  text-align: center;
+  font-weight: 500;
+  display: block;
+}
+
+/* List */
+ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: center;
+}
+
+li {
+  font-size: 0.9em;
+  margin: 5px;
+}
+
+/* Button */
+.date {
+  float: left;
+  font-size: small;
+  width: 30px;
+  height: 25px;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}

@@ -1,6 +1,6 @@
 .container {
   float: right;
-  margin: 10px;
+  margin-right: 10px;
 }
 
 .title {
@@ -10,12 +10,12 @@
 
 /* Button */
 .button {
-  background-color: #312d2d;
+  background-color: #413f3f;
   border: none;
 }
 
 .button:hover {
-  background-color: #443f3f;
+  background-color: #636060;
 }
 
 /* Image */

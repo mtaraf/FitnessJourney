@@ -1,10 +1,15 @@
 /* Content */
 .container {
   float: right;
-  margin: 10px auto;
 }
 
 /* Button */
 .button {
-  background-color: #312d2d;
+  background-color: #413f3f;
+  border: none;
+}
+
+.button:hover {
+  background-color: #636060;
+  border: none;
 }

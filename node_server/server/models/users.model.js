@@ -36,6 +36,62 @@ const UsersSchema = mongoose.Schema(
         ],
       },
     ],
+
+    weeklyPlan: {
+      type: [
+        {
+          title: {
+            type: String,
+          },
+          exercises: [
+            {
+              name: {
+                type: String,
+              },
+              sets: {
+                type: String,
+              },
+              reps: {
+                type: String,
+              },
+              weight: {
+                type: String,
+              },
+            },
+          ],
+        },
+      ],
+      default: [
+        {
+          title: "",
+          exercises: [],
+        },
+        {
+          title: "",
+          exercises: [],
+        },
+        {
+          title: "",
+          exercises: [],
+        },
+        {
+          title: "",
+          exercises: [],
+        },
+        {
+          title: "",
+          exercises: [],
+        },
+        {
+          title: "",
+          exercises: [],
+        },
+        {
+          title: "",
+          exercises: [],
+        },
+      ],
+    },
   },
   {
     timestamps: true, // CreatedAt and UpdatedAt

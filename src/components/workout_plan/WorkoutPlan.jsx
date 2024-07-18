@@ -10,6 +10,9 @@ export default function WorkoutPlan({ user, setUser }) {
   const [show, setShow] = useState(false);
   const [active, setActive] = useState(0);
 
+  // TO-DO: Put this in ENV file
+  const USERS_API_URL = "http://localhost:5000/api/users";
+
   const handleShow = () => {
     setShow(true);
   };
@@ -20,6 +23,34 @@ export default function WorkoutPlan({ user, setUser }) {
 
   const displayDetails = (index) => {
     setActive(index);
+  };
+
+  // change weekly plan of user
+  const changeWeeklyPlan = (day, workout) => {
+    console.log(day);
+    console.log(workout);
+    let tempUser = user;
+    tempUser.weeklyPlan[day] = workout;
+    setUser(tempUser);
+    console.log(user);
+
+    updateWeeklyPlanData();
+  };
+
+  // update database with new weekly plan for user
+  const updateWeeklyPlanData = async () => {
+    const updatedWorkouts = { weeklyPlan: user.weeklyPlan };
+    try {
+      const response = await fetch(`${USERS_API_URL}/${user.username}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedWorkouts),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // populate workout list based on user data
@@ -34,6 +65,11 @@ export default function WorkoutPlan({ user, setUser }) {
 
   return (
     <div className={styles.row}>
+      <WeeklyPlan
+        user={user}
+        workoutList={workoutList}
+        changeWeeklyPlan={changeWeeklyPlan}
+      />
       <Card className={styles.workoutsCard}>
         {/* Title */}
         <div className={styles.title}>
@@ -102,8 +138,6 @@ export default function WorkoutPlan({ user, setUser }) {
           />
         </Offcanvas.Body>
       </Offcanvas>
-
-      <WeeklyPlan />
     </div>
   );
 }

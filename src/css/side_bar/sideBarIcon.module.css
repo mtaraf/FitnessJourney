@@ -14,14 +14,14 @@
 .button {
   width: 70px;
   border-radius: 10px;
-  background-color: #312d2d;
+  background-color: #413f3f;
   border: none;
   cursor: pointer;
   padding: 10px;
 }
 
 .button:hover {
-  background-color: beige;
+  background-color: #636060;
 }
 
 .button:focus {

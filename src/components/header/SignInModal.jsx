@@ -97,6 +97,7 @@ export default function SignInModal({ show, setShow, setUser }) {
         profilePicture: 0,
         username: success.username,
         workouts: success.workouts,
+        weeklyPlan: success.weeklyPlan,
       };
       setUser(tempUser);
       setLoginError(false);

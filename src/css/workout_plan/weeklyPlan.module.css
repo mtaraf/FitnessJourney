@@ -1,8 +1,10 @@
 /* Card */
 .card {
-  margin: 10px;
+  margin: 10px 0px;
   height: 100%;
-  width: 50%;
+  min-height: 200px;
+  width: 90%;
+  background-color: #f3f3f3;
 }
 
 .content {
@@ -47,7 +49,7 @@
   width: 20%;
 }
 
-/* Button */
+/* Buttons */
 .button {
   float: right;
   cursor: pointer;
@@ -61,4 +63,38 @@
 
 .button:hover {
   background-color: #3b3838;
+}
+
+.modalButton {
+  cursor: pointer;
+  border: none;
+  background-color: #312d2d;
+  margin-top: 15px;
+}
+
+.modalButton:hover {
+  background-color: #3b3838;
+}
+
+/* Table */
+.table {
+  margin: 20px 2.5%;
+  border: 1px solid black;
+  width: 95%;
+}
+
+.table td {
+  width: 14.2%;
+  height: auto;
+  padding: 0;
+}
+
+.table td:hover {
+  cursor: pointer;
+  background-color: #f9f4f0;
+}
+
+.table th {
+  text-align: center;
+  font-size: 1.5em;
 }
