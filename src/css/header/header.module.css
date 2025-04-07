@@ -2,6 +2,7 @@
 .container {
   background-color: #535050;
   display: inline-block;
+  width: 100%;
 }
 
 .title {

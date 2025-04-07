@@ -7,18 +7,14 @@ import cardio from "../../assets/cardio.png";
 import diet from "../../assets/diet.png";
 import SideBarIcon from "./SideBarIcon";
 
-export default function SideBar({ setCurrent }) {
+export default function SideBar() {
   return (
     <div className={styles.container}>
       <div>
-        <SideBarIcon image={homeIcon} title="Home" setCurrent={setCurrent} />
-        <SideBarIcon
-          image={plan}
-          title="Workout Plan"
-          setCurrent={setCurrent}
-        />
-        <SideBarIcon image={cardio} title="Cardio" setCurrent={setCurrent} />
-        <SideBarIcon image={diet} title="Nutrition" setCurrent={setCurrent} />
+        <SideBarIcon image={homeIcon} title="Home" />
+        <SideBarIcon image={plan} title="Workout Plan" />
+        <SideBarIcon image={cardio} title="Cardio" />
+        <SideBarIcon image={diet} title="Nutrition" />
       </div>
     </div>
   );

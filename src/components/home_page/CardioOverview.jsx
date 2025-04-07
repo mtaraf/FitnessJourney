@@ -7,8 +7,8 @@ export default function CardioOverview({ details }) {
       <Card>
         <div className={styles.title}>Cardio</div>
         <div>
-          {details.map((detail) => (
-            <div>{detail}</div>
+          {details.map((detail, index) => (
+            <div key={index}>{detail}</div>
           ))}
         </div>
       </Card>

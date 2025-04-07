@@ -7,10 +7,14 @@ import { useEffect, useState } from "react";
 import defaultProfilePic from "../../assets/defaultProfilePic.png";
 import ProfileButton from "./ProfileButton";
 
-export default function Header({ setCurrent, user, setUser }) {
+export default function Header() {
   const [signIn, setSignIn] = useState(false);
 
   const profilePictures = [defaultProfilePic];
+
+  const setCurrent = () => {};
+  const user = "";
+  const setUser = () => {};
 
   useEffect(() => {
     if (user.signedIn) {

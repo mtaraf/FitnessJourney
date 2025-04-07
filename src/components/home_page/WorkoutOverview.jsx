@@ -27,7 +27,9 @@ export default function WorkoutOverview({
                 <div className={styles.subTitle}>{workoutTitle}</div>
                 <div>
                   {workoutDetails.map((detail) => (
-                    <div className={styles.details}>{detail}</div>
+                    <div className={styles.details} key={detail}>
+                      {detail}
+                    </div>
                   ))}
                 </div>
               </div>

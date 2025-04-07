@@ -4,11 +4,14 @@ import styles from "../../css/workout_plan/workoutPlan.module.css";
 import WorkoutDetails from "./WorkoutDetails";
 import WorkoutForm from "./WorkoutForm";
 import WeeklyPlan from "./WeeklyPlan";
+import { useAppContext } from "../AppContext";
 
-export default function WorkoutPlan({ user, setUser }) {
+export default function WorkoutPlan() {
   const [workoutList, setWorkoutList] = useState([]);
   const [show, setShow] = useState(false);
   const [active, setActive] = useState(0);
+
+  const { state, setState, user, setUser } = useAppContext();
 
   // TO-DO: Put this in ENV file
   const USERS_API_URL = "http://localhost:5000/api/users";

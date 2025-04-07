@@ -1,20 +1,20 @@
 import styles from "../../css/side_bar/sideBarIcon.module.css";
 import { Image } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
-export default function SideBarIcon({ image, title, setCurrent }) {
+export default function SideBarIcon({ image, title }) {
+  const navigate = useNavigate();
   function setCurrentPage() {
     switch (title) {
       case "Home":
-        setCurrent(0);
+        navigate("/");
         break;
       case "Workout Plan":
-        setCurrent(1);
+        navigate("/workout");
         break;
       case "Cardio":
-        setCurrent(2);
         break;
       case "Nutrition":
-        setCurrent(3);
         break;
       default:
         console.error("Error changing page");
