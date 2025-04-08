@@ -2,12 +2,14 @@
 :root {
   /* Background Colors */
   --dark-theme-background: #06080a;
+  --dark-theme-off-background: #12171d;
 
   /* Container Colors */
   --dark-theme-container: #0d1317;
 
   /* Text Colors */
   --dark-theme-text: #f9f4f0;
+  --dark-theme-subtext: #d1cdc9;
   --dark-theme-button-text: #06080a;
 
   /* Border Colors */

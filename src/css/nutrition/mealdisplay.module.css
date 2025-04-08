@@ -1,0 +1,14 @@
+.mainContainer {
+  width: 95%;
+  margin: 20px auto;
+  color: var(--dark-theme-text);
+  background-color: var(--dark-theme-off-background);
+  border-radius: 10px;
+  min-height: 100px;
+}
+
+.title {
+  font-size: 20px;
+  padding: 5px;
+  border-bottom: 1px solid var(--dark-theme-border);
+}

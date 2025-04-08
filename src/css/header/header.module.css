@@ -1,6 +1,6 @@
 /* Content */
 .container {
-  background-color: var(--dark-theme-container);
+  background-color: var(--dark-theme-off-background);
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
   border-bottom: 1px solid var(--dark-theme-border);
@@ -16,7 +16,7 @@
 
 /* Button */
 .button {
-  background-color: var(--dark-theme-container);
+  background-color: var(--dark-theme-off-background);
   border: none;
   font-weight: bold;
   font-size: 1.5em;
@@ -24,7 +24,7 @@
 }
 
 .button:hover {
-  background-color: var(--dark-theme-container);
+  background-color: var(--dark-theme-off-background);
 }
 
 .profileButton {

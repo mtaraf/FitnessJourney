@@ -3,16 +3,26 @@
 }
 
 .mainContainer {
-  border: 1px solid black;
+  border: 1px solid var(--dark-theme-border);
+  background-color: var(--dark-theme-background);
+  color: var(--dark-theme-text);
   border-radius: 10px;
   min-height: 50vh;
+}
+
+.sideContainer {
+  margin-left: 20px;
+  color: var(--dark-theme-text);
+  border: 1px solid var(--dark-theme-border);
+  border-radius: 10px;
+  min-height: 250px;
 }
 
 .title {
   font-size: 35px;
   padding: 5px;
   margin: 0 10px;
-  border-bottom: 1px solid black;
+  border-bottom: 1px solid var(--dark-theme-border);
 }
 
 .barContainer {
@@ -21,8 +31,7 @@
 }
 
 .bar {
-  background-color: tan;
-  color: blueviolet;
+  background-color: var(--dark-theme-off-background);
   height: 30px;
   width: 90%;
   margin-top: 5px;
