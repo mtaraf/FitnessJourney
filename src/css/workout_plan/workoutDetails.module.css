@@ -11,7 +11,16 @@
 }
 
 /* Table */
+.table {
+  border: 1px solid var(--dark-theme-border);
+}
+
 .table th {
-  background-color: #413f3f;
-  color: whitesmoke;
+  background-color: var(--dark-theme-background);
+  color: var(--dark-theme-text);
+}
+
+.table td {
+  background-color: var(--dark-theme-background);
+  color: var(--dark-theme-text);
 }

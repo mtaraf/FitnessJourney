@@ -1,0 +1,19 @@
+/* Color Palette */
+:root {
+  /* Background Colors */
+  --dark-theme-background: #06080a;
+
+  /* Container Colors */
+  --dark-theme-container: #0d1317;
+
+  /* Text Colors */
+  --dark-theme-text: #f9f4f0;
+  --dark-theme-button-text: #06080a;
+
+  /* Border Colors */
+  --dark-theme-border: #3b3838;
+
+  /* Button Colors */
+  --dark-theme-button: #413f3f;
+  --dark-theme-button-hover: #3b3838;
+}

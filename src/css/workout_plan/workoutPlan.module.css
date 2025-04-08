@@ -5,11 +5,13 @@
 
 /* Card */
 .workoutsCard {
-  margin-top: 10px;
+  margin: 10px auto;
   min-height: 300px;
   height: 100%;
-  width: 50%;
-  background-color: #f3f3f3;
+  width: 90%;
+  background-color: var(--dark-theme-container);
+  color: var(--dark-theme-text);
+  border: 1px solid var(--dark-theme-border);
 }
 
 .container {
@@ -35,19 +37,19 @@
   font-size: 0.8em;
   float: right;
   cursor: pointer;
-  background-color: #413f3f;
-  color: whitesmoke;
+  background-color: var(--dark-theme-button);
+  color: var(--dark-theme-text);
 }
 
 .listItem:hover {
-  background-color: #636060;
-  color: whitesmoke;
+  background-color: var(--dark-theme-button-hover);
+  color: var(--dark-theme-text);
 }
 
 .listItem:focus {
   outline: none;
   background-color: #3b3838;
-  color: whitesmoke;
+  color: var(--dark-theme-text);
 }
 
 .list {

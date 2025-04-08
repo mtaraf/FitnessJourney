@@ -15,6 +15,7 @@ export default function SideBarIcon({ image, title }) {
       case "Cardio":
         break;
       case "Nutrition":
+        navigate("/nutrition");
         break;
       default:
         console.error("Error changing page");

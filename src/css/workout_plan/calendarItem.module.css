@@ -1,9 +1,11 @@
 .item {
   min-height: 100px;
+  background-color: var(--dark-theme-background);
+  color: var(--dark-theme-text);
 }
 
 .calendarTitle {
-  border-bottom: 1px solid #312d2d;
+  border-bottom: 1px solid var(--dark-theme-border);
   text-align: center;
   font-weight: 500;
   display: block;
@@ -27,6 +29,6 @@ li {
   font-size: small;
   width: 30px;
   height: 25px;
-  border-right: 1px solid black;
-  border-bottom: 1px solid black;
+  border-right: 1px solid var(--dark-theme-border);
+  border-bottom: 1px solid var(--dark-theme-border);
 }

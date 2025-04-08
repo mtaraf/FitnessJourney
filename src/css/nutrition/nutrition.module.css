@@ -1,0 +1,29 @@
+.content {
+  margin-top: 20px;
+}
+
+.mainContainer {
+  border: 1px solid black;
+  border-radius: 10px;
+  min-height: 50vh;
+}
+
+.title {
+  font-size: 35px;
+  padding: 5px;
+  margin: 0 10px;
+  border-bottom: 1px solid black;
+}
+
+.barContainer {
+  margin: 10px 0px;
+  font-size: 20px;
+}
+
+.bar {
+  background-color: tan;
+  color: blueviolet;
+  height: 30px;
+  width: 90%;
+  margin-top: 5px;
+}

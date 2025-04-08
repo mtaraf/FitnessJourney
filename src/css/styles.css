@@ -1,5 +1,5 @@
 body {
-  background-color: #c9c5c5;
+  background-color: var(--dark-theme-background);
 }
 
 .column {

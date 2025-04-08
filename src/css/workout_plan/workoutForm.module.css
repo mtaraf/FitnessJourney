@@ -20,7 +20,8 @@
 .button {
   margin-top: 5px;
   margin-bottom: 20px;
-  background-color: #312d2d;
+  background-color: var(--dark-theme-button);
+  color: var(--dark-theme-text);
   border: none;
 }
 

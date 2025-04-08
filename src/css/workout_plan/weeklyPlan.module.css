@@ -1,10 +1,13 @@
 /* Card */
 .card {
-  margin: 10px 0px;
+  margin: 20px auto;
   height: 100%;
   min-height: 200px;
   width: 90%;
-  background-color: #f3f3f3;
+  background-color: var(--dark-theme-container);
+  color: var(--dark-theme-text);
+  border: 1px solid var(--dark-theme-border);
+  border-radius: 20px;
 }
 
 .content {
@@ -21,16 +24,16 @@
   font-size: 2em;
   font-weight: 600;
   text-align: center;
-  border-bottom: 1px solid #312d2d;
+  border-bottom: 1px solid var(--dark-theme-border);
 }
 
 /* List */
 .listItem {
-  border: 1px rgb(87, 83, 83) solid;
+  border: 1px solid var(--dark-theme-text);
   font-size: 0.8em;
   float: right;
   cursor: pointer;
-  background-color: #312d2d;
+  background-color: var(--dark-theme-container);
   color: whitesmoke;
 }
 
@@ -87,6 +90,7 @@
   width: 14.2%;
   height: auto;
   padding: 0;
+  border: 1px solid var(--dark-theme-border);
 }
 
 .table td:hover {
