@@ -15,6 +15,9 @@ export default function Nutrition() {
     console.log("Item Added");
   };
 
+  let log = foodLog.find((log) => log.date === "4/20");
+  console.log(JSON.stringify(log));
+
   return (
     <Container fluid>
       <Row xs={12} className={`g-1 ${styles.content}`}>
@@ -22,13 +25,9 @@ export default function Nutrition() {
           <div className={styles.title}>Food Log</div>
           <Row>
             <Col>
-              <MealDisplay mealTitle={"Breakfast"} />
-              <div>
-                <div>Lunch</div>
-              </div>
-              <div>
-                <div>Dinner</div>
-              </div>
+              {log.meals?.map((meal, index) => (
+                <MealDisplay key={index} meal={meal} />
+              ))}
             </Col>
             <Col>
               <div className={styles.barContainer}>

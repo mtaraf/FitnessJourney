@@ -5,10 +5,31 @@
   background-color: var(--dark-theme-off-background);
   border-radius: 10px;
   min-height: 100px;
+  padding: 5px 10px;
+  padding-left: 10px;
+}
+
+.titleContainer {
+  border-bottom: 1px solid var(--dark-theme-border);
+  padding: 5px 0;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .title {
   font-size: 20px;
-  padding: 5px;
-  border-bottom: 1px solid var(--dark-theme-border);
+}
+
+.foodContainer {
+  padding: 10px 0;
+}
+
+.foodTitle {
+  font-size: 18px;
+}
+
+.foodDetails {
+  color: var(--dark-theme-subtext);
 }

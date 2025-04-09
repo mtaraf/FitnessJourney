@@ -13,16 +13,24 @@ export const AppProvider = ({ children }) => {
   });
   const [foodLog, setFoodLog] = useState([
     {
-      date: "",
+      date: "4/20",
       meals: [
         {
-          title: "Sandwich",
-          calories: 900,
-          protein: 90,
+          title: "Breakfast",
+          foods: [
+            { name: "Sandwich", calories: 400, protein: 54 },
+            { name: "Yogurt", calories: 100, protein: 14 },
+          ],
+        },
+        {
+          title: "Lunch",
+          foods: [],
+        },
+        {
+          title: "Dinner",
+          foods: [],
         },
       ],
-      calories: 0,
-      protein: 0,
     },
   ]);
 
