@@ -1,0 +1,11 @@
+.mainContainer {
+  background-color: var(--dark-theme-button);
+  color: var(--dark-theme-text);
+  padding: 7px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.mainContainer:hover {
+  background-color: var(--dark-theme-button-hover);
+}

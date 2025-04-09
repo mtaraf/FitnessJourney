@@ -1,0 +1,26 @@
+.mainContainer {
+  border: 1px solid var(--dark-theme-border);
+  background-color: var(--dark-theme-background);
+  color: var(--dark-theme-text);
+  border-radius: 10px;
+  min-height: 500px;
+}
+
+.title {
+  font-size: 35px;
+  padding: 5px;
+  margin: 0 10px;
+  border-bottom: 1px solid var(--dark-theme-border);
+}
+
+.barContainer {
+  margin: 10px 0px;
+  font-size: 20px;
+}
+
+.bar {
+  background-color: var(--dark-theme-off-background);
+  height: 30px;
+  width: 90%;
+  margin-top: 5px;
+}

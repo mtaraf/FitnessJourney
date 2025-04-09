@@ -20,7 +20,6 @@ export default function SideBarIcon({ image, title }) {
       default:
         console.error("Error changing page");
     }
-    console.log(title);
   }
 
   return (

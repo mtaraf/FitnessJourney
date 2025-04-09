@@ -1,0 +1,36 @@
+.mainContainer {
+  border: 1px solid var(--dark-theme-border);
+  margin-top: 20px;
+  border-radius: 10px;
+  padding: 10px;
+  color: var(--dark-theme-text);
+  display: flex;
+  flex-direction: row;
+  padding-top: 0px;
+}
+
+.subContainer {
+  border-right: 1px solid var(--dark-theme-border);
+  width: 50%;
+  padding: 5px;
+}
+
+.subTitleBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--dark-theme-border);
+  padding: 5px;
+}
+
+.title {
+  font-size: 20px;
+}
+
+.button {
+  background-color: var(--dark-theme-off-background);
+}
+
+.foodContainer {
+}

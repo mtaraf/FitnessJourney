@@ -33,10 +33,32 @@ export const AppProvider = ({ children }) => {
       ],
     },
   ]);
+  const [userNutritionData, setUserNutritionData] = useState({
+    meals: [
+      {
+        title: "Breakfast",
+        foods: [
+          { name: "Sandwich", calories: 400, protein: 54 },
+          { name: "Yogurt", calories: 100, protein: 14 },
+        ],
+      },
+    ],
+    foods: [{ name: "Yogurt", calories: 100, protein: 14 }],
+    favorites: [{ name: "Yogurt", calories: 100, protein: 14 }],
+  });
 
   return (
     <AppContext.Provider
-      value={{ state, setState, user, setUser, foodLog, setFoodLog }}
+      value={{
+        state,
+        setState,
+        user,
+        setUser,
+        foodLog,
+        setFoodLog,
+        userNutritionData,
+        setUserNutritionData,
+      }}
     >
       {children}
     </AppContext.Provider>

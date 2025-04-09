@@ -2,20 +2,12 @@
   margin-top: 20px;
 }
 
-.mainContainer {
-  border: 1px solid var(--dark-theme-border);
-  background-color: var(--dark-theme-background);
-  color: var(--dark-theme-text);
-  border-radius: 10px;
-  min-height: 50vh;
-}
-
 .sideContainer {
   margin-left: 20px;
   color: var(--dark-theme-text);
   border: 1px solid var(--dark-theme-border);
   border-radius: 10px;
-  min-height: 250px;
+  height: 500px;
 }
 
 .title {
@@ -25,14 +17,7 @@
   border-bottom: 1px solid var(--dark-theme-border);
 }
 
-.barContainer {
-  margin: 10px 0px;
-  font-size: 20px;
-}
-
-.bar {
-  background-color: var(--dark-theme-off-background);
-  height: 30px;
-  width: 90%;
-  margin-top: 5px;
+.logItemContainer {
+  overflow-y: scroll;
+  height: 420px;
 }

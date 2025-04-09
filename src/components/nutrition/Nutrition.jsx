@@ -1,66 +1,51 @@
-import { Col, Container, ProgressBar, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useAppContext } from "../AppContext";
 import styles from "../../css/nutrition/nutrition.module.css";
-import { CircularProgressbar } from "react-circular-progressbar";
 import LogItem from "./LogItem";
-import MealDisplay from "./MealDisplay";
+import LogDisplay from "./LogDisplay";
+import AddFoodDisplay from "./AddFoodDisplay";
 
 export default function Nutrition() {
-  const { state, setState, user, setUser, foodLog, setFoodLog } =
-    useAppContext();
-
-  let displayed_log = foodLog.filter((log) => log.date);
+  const {
+    state,
+    setState,
+    user,
+    setUser,
+    foodLog,
+    setFoodLog,
+    userNutritionData,
+  } = useAppContext();
 
   const addItem = () => {
     console.log("Item Added");
   };
 
   let log = foodLog.find((log) => log.date === "4/20");
-  console.log(JSON.stringify(log));
 
   return (
     <Container fluid>
       <Row xs={12} className={`g-1 ${styles.content}`}>
-        <Col xs={9} className={styles.mainContainer}>
-          <div className={styles.title}>Food Log</div>
-          <Row>
-            <Col>
-              {log.meals?.map((meal, index) => (
-                <MealDisplay key={index} meal={meal} />
-              ))}
-            </Col>
-            <Col>
-              <div className={styles.barContainer}>
-                <div>Calories</div>
-                <ProgressBar
-                  className={styles.bar}
-                  now={(15 / 100) * 100}
-                  label="15/100"
-                />
-              </div>
-              <div className={styles.barContainer}>
-                <div>Protein</div>
-                <ProgressBar
-                  className={styles.bar}
-                  now={(15 / 100) * 100}
-                  label="15/100"
-                />
-              </div>
-            </Col>
-          </Row>
+        <Col xs={{ span: 8, offset: 1 }}>
+          <LogDisplay log={log} />
         </Col>
         <Col xs={2} className={styles.sideContainer}>
           <div className={styles.title}>Favorites</div>
-          <LogItem
-            addItem={addItem}
-            name={"Banana"}
-            information={{ protein: 5, calories: 150 }}
-          />
+          <div className={styles.logItemContainer}>
+            {userNutritionData.favorites?.map((item) => (
+              <LogItem
+                addItem={addItem}
+                name={item.name}
+                calories={item.calories}
+                protein={item.protein}
+              />
+            ))}
+          </div>
         </Col>
       </Row>
       <Row xs={12}>
-        <Col xs={6}></Col>
-        <Col xs={6}></Col>
+        <Col xs={{ span: 10, offset: 1 }}>
+          <AddFoodDisplay />
+        </Col>
       </Row>
     </Container>
   );
