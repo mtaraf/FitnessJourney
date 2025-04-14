@@ -6,11 +6,17 @@
   min-height: 500px;
 }
 
-.title {
-  font-size: 35px;
-  padding: 5px;
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   margin: 0 10px;
   border-bottom: 1px solid var(--dark-theme-border);
+  padding: 5px;
+}
+
+.title {
+  font-size: 35px;
 }
 
 .barContainer {

@@ -10,9 +10,10 @@
 }
 
 .subContainer {
-  border-right: 1px solid var(--dark-theme-border);
   width: 50%;
   padding: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 .subTitleBar {
@@ -32,5 +33,46 @@
   background-color: var(--dark-theme-off-background);
 }
 
-.foodContainer {
+.items {
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+}
+
+/* Offcanvas */
+.offcanvas {
+  background-color: var(--dark-theme-off-background);
+  color: var(--dark-theme-text);
+}
+
+.offcanvasTitle {
+  font-size: 30px;
+  border-bottom: 1px solid var(--dark-theme-border);
+  width: 95%;
+  padding: 5px;
+  margin: 20px auto;
+}
+
+/* Form */
+.formGroup {
+  margin: 20px 0;
+}
+
+.formControl {
+  border: 1px solid var(--dark-theme-border);
+  background-color: var(--dark-theme-input);
+  cursor: pointer;
+  color: var(--dark-theme-text);
+}
+
+.formControl:focus {
+  background-color: var(--dark-theme-input);
+  cursor: default;
+  color: var(--dark-theme-text);
+  box-shadow: none;
+}
+
+.formButton {
+  margin: 30px 0px;
+  width: 20%;
 }

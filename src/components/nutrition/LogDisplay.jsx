@@ -3,9 +3,15 @@ import styles from "../../css/nutrition/logdisplay.module.css";
 import MealDisplay from "./MealDisplay";
 
 export default function LogDisplay({ log }) {
+  const changeDate = (date) => {
+    console.log(date);
+  };
+
   return (
     <div className={styles.mainContainer}>
-      <div className={styles.title}>Food Log</div>
+      <div className={styles.titleContainer}>
+        <div className={styles.title}>Food Log</div>
+      </div>
       <Row>
         <Col>
           {log.meals?.map((meal, index) => (
