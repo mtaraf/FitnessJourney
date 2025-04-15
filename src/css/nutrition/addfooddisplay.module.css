@@ -55,7 +55,7 @@
 
 /* Form */
 .formGroup {
-  margin: 20px 0;
+  margin: 10px 0;
 }
 
 .formControl {
@@ -63,6 +63,7 @@
   background-color: var(--dark-theme-input);
   cursor: pointer;
   color: var(--dark-theme-text);
+  margin: 10px 0;
 }
 
 .formControl:focus {
@@ -70,6 +71,10 @@
   cursor: default;
   color: var(--dark-theme-text);
   box-shadow: none;
+}
+
+.formControl::placeholder {
+  color: var(--dark-theme-text);
 }
 
 .formButton {

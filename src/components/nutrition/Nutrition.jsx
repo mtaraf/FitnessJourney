@@ -33,7 +33,7 @@ export default function Nutrition() {
           <div className={styles.logItemContainer}>
             {userNutritionData.favorites?.map((item) => (
               <LogItem
-                addItem={addItem}
+                onClick={addItem}
                 name={item.name}
                 calories={item.calories}
                 protein={item.protein}

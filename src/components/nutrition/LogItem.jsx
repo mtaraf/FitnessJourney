@@ -1,8 +1,15 @@
 import { Button } from "react-bootstrap";
 import styles from "../../css/nutrition/logitem.module.css";
-import { AiOutlinePlusCircle } from "react-icons/ai";
+import { AiOutlinePlusCircle, AiOutlineMinus } from "react-icons/ai";
 
-export default function LogItem({ addItem, name, calories, protein }) {
+export default function LogItem({
+  onClick,
+  name,
+  calories,
+  protein,
+  addButton = true,
+  subtractButton = false,
+}) {
   return (
     <div className={styles.mainContainer}>
       <div className={styles.information}>
@@ -14,10 +21,15 @@ export default function LogItem({ addItem, name, calories, protein }) {
       <div
         className={styles.addIcon}
         onClick={() => {
-          addItem();
+          onClick();
         }}
+        hidden={!addButton}
       >
-        <AiOutlinePlusCircle size={25} />
+        {subtractButton ? (
+          <AiOutlineMinus size={25} />
+        ) : (
+          <AiOutlinePlusCircle size={25} />
+        )}
       </div>
     </div>
   );
