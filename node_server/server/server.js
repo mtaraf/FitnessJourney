@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const Product = require("./models/product.model.js");
 const router = require("./routes/product.route.js");
 const usersRouter = require("./routes/users.route.js");
+const userNutritionRouter = require("./routes/userNutrition.route.js");
 
 // middle-ware
 app.use(express.json());
@@ -26,6 +27,8 @@ app.use(function (req, res, next) {
 app.use("/api/products", router);
 
 app.use("/api/users", usersRouter);
+
+app.use("/api/userNutrition", userNutritionRouter);
 
 // app.get("/", (req, res) => {
 //   res.json({ username: "default" });
@@ -97,7 +100,7 @@ app.delete("/api/products/:id", async (req, res) => {
 
 mongoose
   .connect(
-    "mongodb+srv://marcostaraf:NSteHhpnHxUcJvzF@fitness-app-backend-db.d6ovmqy.mongodb.net/Node-API?retryWrites=true&w=majority&appName=fitness-app-backend-db"
+    "mongodb+srv://admin:admin@dev.hmlkvje.mongodb.net/?retryWrites=true&w=majority&appName=dev"
   )
   .then(() => {
     console.log("Connected!");

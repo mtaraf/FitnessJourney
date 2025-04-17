@@ -1,42 +1,77 @@
-import {
-  Button,
-  Col,
-  Form,
-  InputGroup,
-  Offcanvas,
-  ProgressBar,
-  Row,
-} from "react-bootstrap";
+import { Form, Offcanvas } from "react-bootstrap";
 import styles from "../../css/nutrition/addfooddisplay.module.css";
-import MealDisplay from "./MealDisplay";
 import CustomButton from "../general/CustomButton";
 import LogItem from "./LogItem";
 import { useState } from "react";
+import { useAppContext } from "../AppContext";
 
 export default function AddFoodDisplay({ meals, foods }) {
   const [mealCanvas, setMealCanvas] = useState(false);
   const [foodCanvas, setFoodCanvas] = useState(false);
   const [ingredientList, setIngredientList] = useState([]);
 
+  const {
+    state,
+    setState,
+    user,
+    setUser,
+    foodLog,
+    setFoodLog,
+    userNutritionData,
+    setUserNutritionData,
+  } = useAppContext();
+
   const addFood = (e) => {
-    console.log(e.target.parentElement[0].value);
-    console.log(e.target.parentElement[1].value);
-    console.log(e.target.parentElement[2].value);
-    console.log(e);
+    const newFood = {
+      name: e.target.parentElement[0].value,
+      calories: Number(e.target.parentElement[1].value),
+      protein: Number(e.target.parentElement[2].value),
+    };
 
     e.target.parentElement[0].value = "";
+
+    let updatedUserNutrition = userNutritionData;
+
+    updatedUserNutrition.foods = [...updatedUserNutrition.foods, newFood];
+
+    // Update database here
+
     setFoodCanvas(false);
   };
 
   const addMeal = (e) => {
+    let totalCalories = 0;
+    let totalProtein = 0;
+
+    ingredientList.forEach((item) => {
+      totalCalories += item.calories;
+      totalProtein += item.protein;
+    });
+
+    const newMeal = {
+      title: e.target.parentElement.parentElement[0].value,
+      foods: ingredientList,
+      totalCalories: totalCalories,
+      totalProtein: totalProtein,
+    };
+
+    let updatedUserNutrition = userNutritionData;
+
+    updatedUserNutrition.meals = [...updatedUserNutrition.meals, newMeal];
+
+    setUserNutritionData(updatedUserNutrition);
+
+    // update database here
+
+    setIngredientList([]);
     setMealCanvas(false);
   };
 
   const addIngredient = (e) => {
     let item = {
       name: e.target.parentElement[1].value,
-      calories: e.target.parentElement[2].value,
-      protein: e.target.parentElement[3].value,
+      calories: Number(e.target.parentElement[2].value),
+      protein: Number(e.target.parentElement[3].value),
     };
     e.target.parentElement[1].value = "";
     e.target.parentElement[2].value = "";
@@ -69,8 +104,14 @@ export default function AddFoodDisplay({ meals, foods }) {
             </div>
           </div>
           <div className={styles.items}>
-            <LogItem onClick={() => {}} name={"hi"} calories={2} protein={2} />
-            <LogItem onClick={() => {}} name={"hi"} calories={2} protein={2} />
+            {userNutritionData.meals?.map((meal) => (
+              <LogItem
+                onClick={() => {}}
+                name={meal.title}
+                calories={meal.totalCalories}
+                protein={meal.totalProtein}
+              />
+            ))}
           </div>
         </div>
         <div className={styles.subContainer}>
@@ -84,8 +125,14 @@ export default function AddFoodDisplay({ meals, foods }) {
             </div>
           </div>
           <div className={styles.items}>
-            <LogItem onClick={() => {}} name={"hi"} calories={2} protein={2} />
-            <LogItem onClick={() => {}} name={"hi"} calories={2} protein={2} />
+            {userNutritionData.foods?.map((food) => (
+              <LogItem
+                onClick={() => {}}
+                name={food.name}
+                calories={food.calories}
+                protein={food.protein}
+              />
+            ))}
           </div>
         </div>
       </div>
@@ -134,7 +181,7 @@ export default function AddFoodDisplay({ meals, foods }) {
                 subtractButton={true}
               />
             ))}
-            <div style={{ marginTop: "30px" }}>
+            <div className={styles.submitButton}>
               <CustomButton
                 label={"Submit"}
                 onclick={(e) => addMeal(e)}
@@ -164,11 +211,13 @@ export default function AddFoodDisplay({ meals, foods }) {
               <Form.Label>Protein</Form.Label>
               <Form.Control type="text" className={styles.formControl} />
             </Form.Group>
-            <CustomButton
-              label={"Submit"}
-              onclick={(e) => addFood(e)}
-              width="20%"
-            />
+            <div className={styles.submitButton}>
+              <CustomButton
+                label={"Submit"}
+                onclick={(e) => addFood(e)}
+                width="20%"
+              />
+            </div>
           </Form>
         </Offcanvas.Body>
       </Offcanvas>

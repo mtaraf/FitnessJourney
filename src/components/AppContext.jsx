@@ -41,6 +41,8 @@ export const AppProvider = ({ children }) => {
           { name: "Sandwich", calories: 400, protein: 54 },
           { name: "Yogurt", calories: 100, protein: 14 },
         ],
+        totalCalories: 500,
+        totalProtein: 68,
       },
     ],
     foods: [{ name: "Yogurt", calories: 100, protein: 14 }],

@@ -42,7 +42,7 @@ export default function Nutrition() {
           </div>
         </Col>
       </Row>
-      <Row xs={12}>
+      <Row xs={12} style={{ marginBottom: "20px" }}>
         <Col xs={{ span: 10, offset: 1 }}>
           <AddFoodDisplay />
         </Col>
