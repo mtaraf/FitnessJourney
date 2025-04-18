@@ -1,8 +1,6 @@
 import styles from "../../css/nutrition/mealdisplay.module.css";
 
 export default function MealDisplay({ meal }) {
-  console.log("Meal: " + JSON.stringify(meal));
-
   let totalCalories = 0;
   let totalProtein = 0;
   meal?.foods.forEach((food) => {

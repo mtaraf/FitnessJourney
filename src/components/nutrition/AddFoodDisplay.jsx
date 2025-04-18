@@ -4,11 +4,22 @@ import CustomButton from "../general/CustomButton";
 import LogItem from "./LogItem";
 import { useState } from "react";
 import { useAppContext } from "../AppContext";
+import { getUser } from "../../services/userService";
 
 export default function AddFoodDisplay({ meals, foods }) {
+  // Modal states
   const [mealCanvas, setMealCanvas] = useState(false);
   const [foodCanvas, setFoodCanvas] = useState(false);
   const [ingredientList, setIngredientList] = useState([]);
+
+  const [foodName, setFoodName] = useState("");
+  const [foodCalories, setFoodCalories] = useState("");
+  const [foodProtein, setFoodProtein] = useState("");
+
+  const [mealName, setMealName] = useState("");
+  const [ingredientName, setIngredientName] = useState("");
+  const [ingredientCalories, setIngredientCalories] = useState("");
+  const [ingredientProtein, setIngredientProtein] = useState("");
 
   const {
     state,
@@ -21,14 +32,12 @@ export default function AddFoodDisplay({ meals, foods }) {
     setUserNutritionData,
   } = useAppContext();
 
-  const addFood = (e) => {
+  const addFood = () => {
     const newFood = {
-      name: e.target.parentElement[0].value,
-      calories: Number(e.target.parentElement[1].value),
-      protein: Number(e.target.parentElement[2].value),
+      name: foodName,
+      calories: Number(foodCalories),
+      protein: Number(foodProtein),
     };
-
-    e.target.parentElement[0].value = "";
 
     let updatedUserNutrition = userNutritionData;
 
@@ -36,10 +45,13 @@ export default function AddFoodDisplay({ meals, foods }) {
 
     // Update database here
 
+    setFoodName("");
+    setFoodCalories("");
+    setFoodProtein("");
     setFoodCanvas(false);
   };
 
-  const addMeal = (e) => {
+  const addMeal = () => {
     let totalCalories = 0;
     let totalProtein = 0;
 
@@ -49,7 +61,7 @@ export default function AddFoodDisplay({ meals, foods }) {
     });
 
     const newMeal = {
-      title: e.target.parentElement.parentElement[0].value,
+      title: mealName,
       foods: ingredientList,
       totalCalories: totalCalories,
       totalProtein: totalProtein,
@@ -63,19 +75,21 @@ export default function AddFoodDisplay({ meals, foods }) {
 
     // update database here
 
+    setMealName("");
     setIngredientList([]);
     setMealCanvas(false);
   };
 
-  const addIngredient = (e) => {
+  const addIngredient = () => {
     let item = {
-      name: e.target.parentElement[1].value,
-      calories: Number(e.target.parentElement[2].value),
-      protein: Number(e.target.parentElement[3].value),
+      name: ingredientName,
+      calories: Number(ingredientCalories),
+      protein: Number(ingredientProtein),
     };
-    e.target.parentElement[1].value = "";
-    e.target.parentElement[2].value = "";
-    e.target.parentElement[3].value = "";
+
+    setIngredientName("");
+    setIngredientProtein("");
+    setIngredientCalories("");
     setIngredientList([...ingredientList, item]);
   };
 
@@ -104,8 +118,9 @@ export default function AddFoodDisplay({ meals, foods }) {
             </div>
           </div>
           <div className={styles.items}>
-            {userNutritionData.meals?.map((meal) => (
+            {userNutritionData.meals?.map((meal, index) => (
               <LogItem
+                key={index}
                 onClick={() => {}}
                 name={meal.title}
                 calories={meal.totalCalories}
@@ -125,8 +140,9 @@ export default function AddFoodDisplay({ meals, foods }) {
             </div>
           </div>
           <div className={styles.items}>
-            {userNutritionData.foods?.map((food) => (
+            {userNutritionData.foods?.map((food, index) => (
               <LogItem
+                key={index}
                 onClick={() => {}}
                 name={food.name}
                 calories={food.calories}
@@ -146,7 +162,11 @@ export default function AddFoodDisplay({ meals, foods }) {
           <Form>
             <Form.Group className={styles.formGroup}>
               <Form.Label>Meal Name</Form.Label>
-              <Form.Control type="text" className={styles.formControl} />
+              <Form.Control
+                type="text"
+                className={styles.formControl}
+                onChange={(e) => setMealName(e.target.value)}
+              />
             </Form.Group>
             <Form.Group className={styles.formGroup}>
               <Form.Label>Enter Ingredients</Form.Label>
@@ -154,23 +174,31 @@ export default function AddFoodDisplay({ meals, foods }) {
                 type="text"
                 placeholder="Name"
                 className={styles.formControl}
+                onChange={(e) => setIngredientName(e.target.value)}
+                value={ingredientName}
               />
               <Form.Control
                 type="text"
                 placeholder="Calories"
                 className={styles.formControl}
+                onChange={(e) => setIngredientCalories(e.target.value)}
+                value={ingredientCalories}
               />
               <Form.Control
                 type="text"
                 placeholder="Protein"
                 className={styles.formControl}
+                onChange={(e) => setIngredientProtein(e.target.value)}
+                value={ingredientProtein}
               />
             </Form.Group>
-            <CustomButton
-              label={"Add"}
-              onclick={(e) => addIngredient(e)}
-              width="20%"
-            />
+            <div className={styles.submitButton}>
+              <CustomButton
+                label={"Add"}
+                onclick={() => addIngredient()}
+                width="20%"
+              />
+            </div>
             {ingredientList?.map((ingredient, index) => (
               <LogItem
                 key={index}
@@ -184,7 +212,7 @@ export default function AddFoodDisplay({ meals, foods }) {
             <div className={styles.submitButton}>
               <CustomButton
                 label={"Submit"}
-                onclick={(e) => addMeal(e)}
+                onclick={() => addMeal()}
                 width="20%"
               />
             </div>
@@ -201,20 +229,32 @@ export default function AddFoodDisplay({ meals, foods }) {
           <Form>
             <Form.Group className={styles.formGroup}>
               <Form.Label>Name</Form.Label>
-              <Form.Control type="text" className={styles.formControl} />
+              <Form.Control
+                type="text"
+                className={styles.formControl}
+                onChange={(e) => setFoodName(e.target.value)}
+              />
             </Form.Group>
             <Form.Group className={styles.formGroup}>
               <Form.Label>Calories</Form.Label>
-              <Form.Control type="text" className={styles.formControl} />
+              <Form.Control
+                type="text"
+                className={styles.formControl}
+                onChange={(e) => setFoodCalories(e.target.value)}
+              />
             </Form.Group>
             <Form.Group className={styles.formGroup}>
               <Form.Label>Protein</Form.Label>
-              <Form.Control type="text" className={styles.formControl} />
+              <Form.Control
+                type="text"
+                className={styles.formControl}
+                onChange={(e) => setFoodProtein(e.target.value)}
+              />
             </Form.Group>
             <div className={styles.submitButton}>
               <CustomButton
                 label={"Submit"}
-                onclick={(e) => addFood(e)}
+                onclick={() => addFood()}
                 width="20%"
               />
             </div>

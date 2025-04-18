@@ -31,8 +31,9 @@ export default function Nutrition() {
         <Col xs={2} className={styles.sideContainer}>
           <div className={styles.title}>Favorites</div>
           <div className={styles.logItemContainer}>
-            {userNutritionData.favorites?.map((item) => (
+            {userNutritionData.favorites?.map((item, index) => (
               <LogItem
+                key={index}
                 onClick={addItem}
                 name={item.name}
                 calories={item.calories}
