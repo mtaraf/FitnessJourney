@@ -1,4 +1,5 @@
-import React, { createContext, useState, useContext } from "react";
+import React, { createContext, useState, useContext, useEffect } from "react";
+import { getUserNutrition } from "../services/userNutritionService";
 
 const AppContext = createContext();
 
@@ -7,7 +8,7 @@ export const AppProvider = ({ children }) => {
   const [user, setUser] = useState({
     signedIn: false,
     profilePicture: 0,
-    username: "",
+    username: "test",
     workouts: [],
     weeklyPlan: [],
   });
@@ -34,20 +35,27 @@ export const AppProvider = ({ children }) => {
     },
   ]);
   const [userNutritionData, setUserNutritionData] = useState({
-    meals: [
-      {
-        title: "Breakfast",
-        foods: [
-          { name: "Sandwich", calories: 400, protein: 54 },
-          { name: "Yogurt", calories: 100, protein: 14 },
-        ],
-        totalCalories: 500,
-        totalProtein: 68,
-      },
-    ],
-    foods: [{ name: "Yogurt", calories: 100, protein: 14 }],
-    favorites: [{ name: "Yogurt", calories: 100, protein: 14 }],
+    meals: [],
+    foods: [],
+    favorites: [],
   });
+
+  useEffect(() => {
+    // Check if user is logged in first
+    const fetchData = async () => {
+      // User Nutrition Data
+      let nutritionDataResponse = await getUserNutrition(user.username);
+      if (nutritionDataResponse.status == 200) {
+        setUserNutritionData({
+          meals: nutritionDataResponse.data[0].meals,
+          foods: nutritionDataResponse.data[0].foods,
+          favorites: nutritionDataResponse.data[0].favorites,
+        });
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <AppContext.Provider

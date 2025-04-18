@@ -1,6 +1,6 @@
 const UserNutrition = require("../models/userNutrition.model.js");
 
-const getUser = async (req, res) => {
+const getUserNutrition = async (req, res) => {
   try {
     const { username } = req.params;
     const userNutrition = await UserNutrition.findOne({ username: username });
@@ -10,7 +10,7 @@ const getUser = async (req, res) => {
   }
 };
 
-const getUsers = async (req, res) => {
+const getUsersNutrition = async (req, res) => {
   try {
     const userNutritions = await UserNutrition.find({});
     res.status(200).json(userNutritions);
@@ -19,7 +19,7 @@ const getUsers = async (req, res) => {
   }
 };
 
-const postUser = async (req, res) => {
+const postUserNutrition = async (req, res) => {
   try {
     await UserNutrition.syncIndexes();
     const userNutrition = await UserNutrition.create(req.body);
@@ -29,8 +29,9 @@ const postUser = async (req, res) => {
   }
 };
 
-const updateUser = async (req, res) => {
+const updateUserNutrition = async (req, res) => {
   try {
+    console.log(JSON.stringify(req));
     await UserNutrition.syncIndexes();
     const { username } = req.params;
     const userNutrition = await UserNutrition.findOneAndUpdate(
@@ -49,8 +50,8 @@ const updateUser = async (req, res) => {
 };
 
 module.exports = {
-  getUser,
-  getUsers,
-  postUser,
-  updateUser,
+  getUserNutrition,
+  getUsersNutrition,
+  postUserNutrition,
+  updateUserNutrition,
 };

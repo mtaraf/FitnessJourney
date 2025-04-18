@@ -5,6 +5,7 @@ import LogItem from "./LogItem";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../AppContext";
 import { getUser } from "../../services/userService";
+import { updateUserNutrition } from "../../services/userNutritionService";
 
 export default function AddFoodDisplay({ meals, foods }) {
   // Modal states
@@ -35,7 +36,7 @@ export default function AddFoodDisplay({ meals, foods }) {
   const [ingredientCalories, setIngredientCalories] = useState("");
   const [ingredientProtein, setIngredientProtein] = useState("");
 
-  const { userNutritionData, setUserNutritionData } = useAppContext();
+  const { user, userNutritionData, setUserNutritionData } = useAppContext();
 
   const ERROR_MESSAGES = {
     NUMBER_TYPE_ERROR: "Please enter a number",
@@ -50,26 +51,43 @@ export default function AddFoodDisplay({ meals, foods }) {
     };
 
     let error = false;
-    if (isNaN(Number(foodCalories))) {
+
+    // Validate Calories
+    if (!foodCalories.trim()) {
+      updatedErrors.calories.message = ERROR_MESSAGES.EMPTY_FORM_VALUE;
+      updatedErrors.calories.value = true;
+      error = true;
+    } else if (isNaN(Number(foodCalories))) {
       updatedErrors.calories.message = ERROR_MESSAGES.NUMBER_TYPE_ERROR;
       updatedErrors.calories.value = true;
+      error = true;
+    } else {
+      updatedErrors.calories.message = "";
+      updatedErrors.calories.value = false;
+    }
+
+    // Validate Protein
+    if (!foodProtein.trim()) {
+      updatedErrors.protein.message = ERROR_MESSAGES.EMPTY_FORM_VALUE;
+      updatedErrors.protein.value = true;
       error = true;
     } else if (isNaN(Number(foodProtein))) {
       updatedErrors.protein.message = ERROR_MESSAGES.NUMBER_TYPE_ERROR;
       updatedErrors.protein.value = true;
       error = true;
-    } else if (!foodName.trim()) {
+    } else {
+      updatedErrors.protein.message = "";
+      updatedErrors.protein.value = false;
+    }
+
+    // Validate Name
+    if (!foodName.trim()) {
       updatedErrors.name.message = ERROR_MESSAGES.EMPTY_FORM_VALUE;
       updatedErrors.name.value = true;
       error = true;
-    } else if (!foodCalories.trim()) {
-      updatedErrors.calories.message = ERROR_MESSAGES.EMPTY_FORM_VALUE;
-      updatedErrors.calories.value = true;
-      error = true;
-    } else if (!foodProtein.trim()) {
-      updatedErrors.protein.message = ERROR_MESSAGES.EMPTY_FORM_VALUE;
-      updatedErrors.protein.value = true;
-      error = true;
+    } else {
+      updatedErrors.name.message = "";
+      updatedErrors.name.value = false;
     }
 
     if (error) {
@@ -87,7 +105,7 @@ export default function AddFoodDisplay({ meals, foods }) {
     addFood();
   };
 
-  const addFood = () => {
+  const addFood = async () => {
     const newFood = {
       name: foodName,
       calories: Number(foodCalories),
@@ -97,7 +115,15 @@ export default function AddFoodDisplay({ meals, foods }) {
 
     updatedUserNutrition.foods = [...updatedUserNutrition.foods, newFood];
 
-    // Update database here
+    // API call to add data to user's nutrition information
+    const response = await updateUserNutrition(
+      user.username,
+      updatedUserNutrition
+    );
+
+    if (response.status !== 200) {
+      // Add an error modal here eventually
+    }
 
     setFoodName("");
     setFoodCalories("");
@@ -105,7 +131,7 @@ export default function AddFoodDisplay({ meals, foods }) {
     setFoodCanvas(false);
   };
 
-  const addMeal = () => {
+  const addMeal = async () => {
     if (!mealName.trim()) {
       setMealNameValidation(true);
       return;
@@ -134,7 +160,15 @@ export default function AddFoodDisplay({ meals, foods }) {
 
     setUserNutritionData(updatedUserNutrition);
 
-    // update database here
+    // API call to add data to user's nutrition information
+    const response = await updateUserNutrition(
+      user.username,
+      updatedUserNutrition
+    );
+
+    if (response.status !== 200) {
+      // Add an error modal here eventually
+    }
 
     setMealName("");
     setIngredientList([]);
@@ -366,7 +400,7 @@ export default function AddFoodDisplay({ meals, foods }) {
         onHide={() => setFoodCanvas(false)}
       >
         <Offcanvas.Body>
-          <Form noValidate>
+          <Form>
             <Form.Group className={styles.formGroup}>
               <Form.Label>Name</Form.Label>
               <Form.Control
