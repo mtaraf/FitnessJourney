@@ -29,3 +29,32 @@
   margin-right: 10px;
   cursor: pointer;
 }
+
+.dropdownButton {
+  background-color: var(--dark-theme-off-background);
+  border: none;
+}
+
+.dropdownButton:focus,
+.dropdownButton:active,
+.dropdownButton:hover,
+.dropdownButton:focus:active {
+  background-color: var(--dark-theme-off-background);
+}
+
+.dropdownButton::after {
+  display: none !important;
+}
+
+.dropdownMenu {
+  background-color: var(--dark-theme-off-background);
+}
+
+.dropdownItem {
+  color: var(--dark-theme-text);
+}
+
+.dropdownItem:hover {
+  background-color: var(--dark-theme-container);
+  color: var(--dark-theme-text);
+}

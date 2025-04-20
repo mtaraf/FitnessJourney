@@ -1,5 +1,6 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { getUserNutrition } from "../services/userNutritionService";
+import { getLogs } from "../services/logService";
 
 const AppContext = createContext();
 
@@ -12,28 +13,7 @@ export const AppProvider = ({ children }) => {
     workouts: [],
     weeklyPlan: [],
   });
-  const [foodLog, setFoodLog] = useState([
-    {
-      date: "4/20",
-      meals: [
-        {
-          title: "Breakfast",
-          foods: [
-            { name: "Sandwich", calories: 400, protein: 54 },
-            { name: "Yogurt", calories: 100, protein: 14 },
-          ],
-        },
-        {
-          title: "Lunch",
-          foods: [],
-        },
-        {
-          title: "Dinner",
-          foods: [],
-        },
-      ],
-    },
-  ]);
+  const [foodLog, setFoodLog] = useState([]);
   const [userNutritionData, setUserNutritionData] = useState({
     meals: [],
     foods: [],
@@ -52,9 +32,17 @@ export const AppProvider = ({ children }) => {
           favorites: nutritionDataResponse.data[0].favorites,
         });
       }
+
+      // Logs
+      let userNutritionLogsResponse = await getLogs(user.username);
+      if (userNutritionLogsResponse.status == 200) {
+        console.log(userNutritionLogsResponse.data?.log);
+        setFoodLog(userNutritionLogsResponse.data?.log);
+      }
     };
 
     fetchData();
+    console.log(foodLog);
   }, []);
 
   return (

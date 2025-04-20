@@ -1,11 +1,15 @@
 import { Col, ProgressBar, Row } from "react-bootstrap";
 import styles from "../../css/nutrition/logdisplay.module.css";
 import MealDisplay from "./MealDisplay";
+import { useEffect, useState } from "react";
+import { useAppContext } from "../AppContext";
 
 export default function LogDisplay({ log }) {
   const changeDate = (date) => {
     console.log(date);
   };
+
+  console.log(log);
 
   return (
     <div className={styles.mainContainer}>
@@ -14,9 +18,29 @@ export default function LogDisplay({ log }) {
       </div>
       <Row>
         <Col>
-          {log.meals?.map((meal, index) => (
+          {/* {log?.meals?.map((meal, index) => (
             <MealDisplay key={index} meal={meal} />
-          ))}
+          ))} */}
+          <MealDisplay
+            meals={log?.breakfast?.meals}
+            foods={log?.breakfast?.foods}
+            title={"Breakfast"}
+          />
+          <MealDisplay
+            meals={log?.lunch?.meals}
+            foods={log?.lunch?.foods}
+            title={"Lunch"}
+          />
+          <MealDisplay
+            meals={log?.dinner?.meals}
+            foods={log?.dinner?.foods}
+            title={"Dinner"}
+          />
+          <MealDisplay
+            meals={log?.everythingElse?.meals}
+            foods={log?.everythingElse?.foods}
+            title={"Everything else"}
+          />
         </Col>
         <Col>
           <div className={styles.barContainer}>

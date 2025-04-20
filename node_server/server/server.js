@@ -3,6 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const usersRouter = require("./routes/users.route.js");
 const userNutritionRouter = require("./routes/userNutrition.route.js");
+const logRouter = require("./routes/logs.route.js");
 
 // middle-ware
 app.use(express.json());
@@ -20,8 +21,8 @@ app.use(function (req, res, next) {
 // routes
 
 app.use("/api/users", usersRouter);
-
 app.use("/api/userNutrition", userNutritionRouter);
+app.use("/api/logs", logRouter);
 
 mongoose
   .connect(

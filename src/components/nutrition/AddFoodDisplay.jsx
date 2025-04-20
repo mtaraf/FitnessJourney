@@ -7,7 +7,7 @@ import { useAppContext } from "../AppContext";
 import { getUser } from "../../services/userService";
 import { updateUserNutrition } from "../../services/userNutritionService";
 
-export default function AddFoodDisplay({ meals, foods }) {
+export default function AddFoodDisplay({ date }) {
   // Modal states
   const [mealCanvas, setMealCanvas] = useState(false);
   const [foodCanvas, setFoodCanvas] = useState(false);
@@ -277,13 +277,7 @@ export default function AddFoodDisplay({ meals, foods }) {
           </div>
           <div className={styles.items}>
             {userNutritionData.meals?.map((meal, index) => (
-              <LogItem
-                key={index}
-                onClick={() => {}}
-                name={meal.title}
-                calories={meal.totalCalories}
-                protein={meal.totalProtein}
-              />
+              <LogItem key={index} onClick={() => {}} meal={meal} date={date} />
             ))}
           </div>
         </div>
@@ -299,13 +293,7 @@ export default function AddFoodDisplay({ meals, foods }) {
           </div>
           <div className={styles.items}>
             {userNutritionData.foods?.map((food, index) => (
-              <LogItem
-                key={index}
-                onClick={() => {}}
-                name={food.name}
-                calories={food.calories}
-                protein={food.protein}
-              />
+              <LogItem key={index} onClick={() => {}} food={food} date={date} />
             ))}
           </div>
         </div>
