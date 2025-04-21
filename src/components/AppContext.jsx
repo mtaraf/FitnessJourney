@@ -8,7 +8,8 @@ export const AppProvider = ({ children }) => {
   const [state, setState] = useState("home");
   const [user, setUser] = useState({
     signedIn: false,
-    profilePicture: 0,
+    information: {},
+    goals: {},
     username: "test",
     workouts: [],
     weeklyPlan: [],
@@ -41,7 +42,7 @@ export const AppProvider = ({ children }) => {
       }
     };
 
-    fetchData();
+    //fetchData();
     console.log(foodLog);
   }, []);
 

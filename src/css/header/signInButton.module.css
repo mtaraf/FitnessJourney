@@ -5,11 +5,11 @@
 
 /* Button */
 .button {
-  background-color: #413f3f;
+  background-color: var(--dark-theme-button);
   border: none;
 }
 
 .button:hover {
-  background-color: #636060;
+  background-color: var(--dark-theme-button-hover);
   border: none;
 }

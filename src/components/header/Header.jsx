@@ -12,6 +12,9 @@ import cardio from "../../assets/cardio.png";
 import diet from "../../assets/diet.png";
 import { useNavigate } from "react-router";
 import { useAppContext } from "../AppContext";
+import { IoHomeOutline } from "react-icons/io5";
+import { FaDumbbell } from "react-icons/fa6";
+import { LuNotebookPen } from "react-icons/lu";
 
 export default function Header() {
   const [signIn, setSignIn] = useState(false);
@@ -29,9 +32,9 @@ export default function Header() {
   }, [user.signedIn]);
 
   const navButtons = [
-    { name: "Home", icon: homeIcon },
-    { name: "Workout", icon: plan },
-    { name: "Nutrition", icon: diet },
+    { name: "Home", icon: <IoHomeOutline /> },
+    { name: "Workout", icon: <FaDumbbell /> },
+    { name: "Nutrition", icon: <LuNotebookPen /> },
   ];
 
   return (
@@ -66,8 +69,17 @@ export default function Header() {
                   setState(button.name.toLowerCase());
                 }}
               >
-                <Image src={button.icon} className={styles.navButtonIcon} />
-                {button.name}
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  {button.icon}
+                  {button.name}
+                </div>
               </div>
             ))}
           </div>

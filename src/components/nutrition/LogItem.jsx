@@ -135,6 +135,16 @@ export default function LogItem({
               >
                 Everything Else
               </Dropdown.Item>
+              <Dropdown.Item
+                className={styles.dropdownItem}
+                onClick={
+                  isMeal
+                    ? () => addToFavorites(meal)
+                    : () => addToFavorites(food)
+                }
+              >
+                Favorites
+              </Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
           // <AiOutlinePlusCircle size={25} />

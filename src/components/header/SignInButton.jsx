@@ -13,11 +13,11 @@ export default function SignInButton({ setUser }) {
 
   return (
     <div className={styles.container}>
-      <Button variant="dark" className={styles.button} onClick={handleClick}>
+      <Button className={styles.button} onClick={handleClick}>
         Sign-In
       </Button>
 
-      <SignInModal show={show} setShow={setShow} setUser={setUser} />
+      <SignInModal show={show} setShow={setShow} />
     </div>
   );
 }

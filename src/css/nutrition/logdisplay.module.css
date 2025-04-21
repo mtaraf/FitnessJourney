@@ -20,13 +20,17 @@
 }
 
 .barContainer {
-  margin: 10px 0px;
+  margin: 10px auto;
   font-size: 20px;
+  text-align: center;
+  align-items: center;
+  display: flex;
+  flex-direction: column;
 }
 
 .bar {
-  background-color: var(--dark-theme-off-background);
-  height: 30px;
-  width: 90%;
-  margin-top: 5px;
+  margin: 15px auto;
+  text-align: center;
+  height: 200px;
+  width: 200px;
 }

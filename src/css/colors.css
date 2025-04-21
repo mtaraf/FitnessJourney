@@ -16,8 +16,9 @@
   --dark-theme-border: #3b3838;
 
   /* Button Colors */
-  --dark-theme-button: #413f3f;
-  --dark-theme-button-hover: #3b3838;
+  /* --dark-theme-button: #413f3f; */
+  --dark-theme-button: #2c3847;
+  --dark-theme-button-hover: #232e3a;
 
   /* Input Colors */
   --dark-theme-input: #202934;

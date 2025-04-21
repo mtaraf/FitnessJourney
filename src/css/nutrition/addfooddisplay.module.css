@@ -39,6 +39,25 @@
   margin-top: 10px;
 }
 
+.searchControl {
+  border: none;
+  background-color: var(--dark-theme-off-background);
+  cursor: pointer;
+  color: var(--dark-theme-text);
+  margin: 5px 0 10px 0;
+}
+
+.searchControl:focus {
+  background-color: var(--dark-theme-off-background);
+  cursor: default;
+  color: var(--dark-theme-text);
+  box-shadow: none;
+}
+
+.searchControl::placeholder {
+  color: var(--dark-theme-text);
+}
+
 /* Offcanvas */
 .offcanvas {
   background-color: var(--dark-theme-off-background);

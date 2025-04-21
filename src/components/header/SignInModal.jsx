@@ -1,17 +1,20 @@
 import { Button, Form, Modal } from "react-bootstrap";
 import styles from "../../css/header/signInModal.module.css";
 import { useEffect, useState } from "react";
+import { createUser, getUser } from "../../services/userService";
+import { useAppContext } from "../AppContext";
 
-export default function SignInModal({ show, setShow, setUser }) {
+export default function SignInModal({ show, setShow }) {
   const [displaySignUp, setDisplaySignUp] = useState(false);
-  const [loginError, setLoginError] = useState(false);
-  const [signUpError, setSignUpError] = useState("");
   const [loginUsername, setLoginUsername] = useState("");
   const [loginPassword, setLoginPassword] = useState("");
+
+  // Error checking
+  const [loginError, setLoginError] = useState(false);
+  const [signUpError, setSignUpError] = useState("");
   const [allowLogin, setAllowLogin] = useState(false);
 
-  // TO-DO: Put this in ENV file
-  const USERS_API_URL = "http://localhost:5000/api/users";
+  const { setUser } = useAppContext();
 
   // Enable login button only if username and password are entered
   useEffect(() => {
@@ -21,60 +24,6 @@ export default function SignInModal({ show, setShow, setUser }) {
       setAllowLogin(false);
     }
   }, [loginUsername, loginPassword]);
-
-  // Creates POST request to create new user
-  const postUser = async (user, pass) => {
-    const userObj = { username: user, password: pass };
-
-    // Add User if valid
-    try {
-      const response = await fetch(USERS_API_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(userObj),
-      });
-
-      const data = await response.json();
-      console.log(data);
-
-      if (response.status === 200) {
-        // User added, login user as well
-        console.log("User Creation Success");
-        return true;
-      } else {
-        if (data.message.includes("duplicate key error")) {
-          setSignUpError("Username is taken! Please try another.");
-        }
-      }
-    } catch (e) {
-      console.log(e);
-    }
-
-    return false;
-  };
-
-  // Creates GET request to check if user exists
-  const getUser = async (username) => {
-    // Check if User exists
-    try {
-      const response = await fetch(`${USERS_API_URL}/${username}`);
-      const data = await response.json();
-      console.log(data);
-
-      // If user exists, login user
-      if (data !== null && response.status === 200) {
-        console.log("Login Success");
-        setAllowLogin(false);
-        return data;
-      }
-    } catch (e) {
-      console.log(e);
-    }
-
-    return null;
-  };
 
   const handleClose = () => {
     setDisplaySignUp(false);
@@ -87,19 +36,21 @@ export default function SignInModal({ show, setShow, setUser }) {
     const username = e.target.username.value;
     const password = e.target.password.value;
 
-    const success = await getUser(e.target.username.value);
-    console.log(success);
+    const response = await getUser(e.target.username.value);
+    console.log(response);
 
-    if (success !== null) {
+    if (response.status === 200) {
       // Login Successful
       const tempUser = {
         signedIn: true,
-        profilePicture: 0,
-        username: success.username,
-        workouts: success.workouts,
-        weeklyPlan: success.weeklyPlan,
+        username: response.data[0].username,
+        workouts: response.data[0].workouts,
+        weeklyPlan: response.data[0].weeklyPlan,
+        goals: response.data[0].goals,
+        information: response.data[0].information,
       };
       setUser(tempUser);
+      console.log(tempUser);
       setLoginError(false);
       handleClose();
     } else {
@@ -115,9 +66,14 @@ export default function SignInModal({ show, setShow, setUser }) {
     const username = e.target.signUpUsername.value;
     const password = e.target.signUpPassword.value;
 
-    const success = await postUser(username, password);
+    const newUser = {
+      username: e.target.signUpUsername.value,
+      password: e.target.signUpPassword.value,
+    };
 
-    if (success) {
+    const response = await createUser(newUser);
+
+    if (response.status === 200) {
       // User creation successfull
       setDisplaySignUp(false);
       setSignUpError("");

@@ -10,12 +10,37 @@
 
 /* Button */
 .button {
-  background-color: #413f3f;
+  background-color: var(--dark-theme-button);
   border: none;
 }
 
-.button:hover {
-  background-color: #636060;
+.button:focus,
+.button:active,
+.button:hover,
+.button:focus:active {
+  background-color: var(--dark-theme-button-hover);
+}
+
+.button:active:hover {
+  background-color: var(--dark-theme-button-hover);
+}
+
+.button::after {
+  display: none !important;
+}
+
+.buttonMenu {
+  background-color: var(--dark-theme-button);
+}
+
+.buttonMenuItem {
+  background-color: var(--dark-theme-button);
+  color: var(--dark-theme-text);
+}
+
+.buttonMenuItem:hover {
+  background-color: var(--dark-theme-button-hover);
+  color: var(--dark-theme-text);
 }
 
 /* Image */

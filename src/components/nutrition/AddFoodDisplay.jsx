@@ -13,30 +13,68 @@ export default function AddFoodDisplay({ date }) {
   const [foodCanvas, setFoodCanvas] = useState(false);
   const [ingredientList, setIngredientList] = useState([]);
 
+  // Validation states
   const [foodErrors, setFoodErrors] = useState({
     name: { value: false, message: "" },
     calories: { value: false, message: "" },
     protein: { value: false, message: "" },
   });
-
   const [ingredientErrors, setIngredientErrors] = useState({
     name: { value: false, message: "" },
     calories: { value: false, message: "" },
     protein: { value: false, message: "" },
   });
-
   const [mealNameValidation, setMealNameValidation] = useState(false);
 
+  // Modal states
   const [foodName, setFoodName] = useState("");
   const [foodCalories, setFoodCalories] = useState("");
   const [foodProtein, setFoodProtein] = useState("");
-
   const [mealName, setMealName] = useState("");
   const [ingredientName, setIngredientName] = useState("");
   const [ingredientCalories, setIngredientCalories] = useState("");
   const [ingredientProtein, setIngredientProtein] = useState("");
 
+  // Search states
+  const [foodSearch, setFoodSearch] = useState("");
+  const [foodSearchList, setFoodSearchList] = useState([]);
+  const [mealSearch, setMealSearch] = useState("");
+  const [mealSearchList, setMealSearchList] = useState([]);
+
+  // App context
   const { user, userNutritionData, setUserNutritionData } = useAppContext();
+
+  // update lists to filter
+  useEffect(() => {
+    setFoodSearchList(userNutritionData.foods);
+    setMealSearchList(userNutritionData.meals);
+  }, [userNutritionData]);
+
+  // filter food list
+  useEffect(() => {
+    let filteredList = [];
+    if (foodSearch.length > 0) {
+      filteredList = userNutritionData.foods.filter((food) =>
+        food.name.toLowerCase().startsWith(foodSearch)
+      );
+    } else {
+      filteredList = userNutritionData.foods;
+    }
+    setFoodSearchList(filteredList);
+  }, [foodSearch]);
+
+  // filter meal list
+  useEffect(() => {
+    let filteredList = [];
+    if (mealSearch.length > 0) {
+      filteredList = userNutritionData.meals.filter((meal) =>
+        meal.title.toLowerCase().startsWith(mealSearch)
+      );
+    } else {
+      filteredList = userNutritionData.meals;
+    }
+    setMealSearchList(filteredList);
+  }, [mealSearch]);
 
   const ERROR_MESSAGES = {
     NUMBER_TYPE_ERROR: "Please enter a number",
@@ -276,7 +314,14 @@ export default function AddFoodDisplay({ date }) {
             </div>
           </div>
           <div className={styles.items}>
-            {userNutritionData.meals?.map((meal, index) => (
+            <Form.Control
+              type="text"
+              placeholder="Search meals"
+              className={styles.searchControl}
+              onChange={(e) => setMealSearch(e.target.value)}
+              value={mealSearch}
+            />
+            {mealSearchList.map((meal, index) => (
               <LogItem key={index} onClick={() => {}} meal={meal} date={date} />
             ))}
           </div>
@@ -292,7 +337,14 @@ export default function AddFoodDisplay({ date }) {
             </div>
           </div>
           <div className={styles.items}>
-            {userNutritionData.foods?.map((food, index) => (
+            <Form.Control
+              type="text"
+              placeholder="Search foods"
+              className={styles.searchControl}
+              onChange={(e) => setFoodSearch(e.target.value)}
+              value={foodSearch}
+            />
+            {foodSearchList.map((food, index) => (
               <LogItem key={index} onClick={() => {}} food={food} date={date} />
             ))}
           </div>

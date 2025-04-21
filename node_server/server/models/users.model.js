@@ -13,6 +13,27 @@ const UsersSchema = mongoose.Schema(
       required: [true, "Please enter password"],
     },
 
+    information: {
+      current_weight: {
+        type: Number,
+      },
+      height: {
+        type: Number,
+      },
+    },
+
+    goals: {
+      calorie_goal: {
+        type: Number,
+      },
+      protein_goal: {
+        type: Number,
+      },
+      weight_goal: {
+        type: Number,
+      },
+    },
+
     workouts: [
       {
         title: {
