@@ -5,28 +5,32 @@ import { useEffect, useState } from "react";
 import { useAppContext } from "../AppContext";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
-export default function LogDisplay({ log }) {
+export default function LogDisplay({ log, setLogDate }) {
   const [dailyCalories, setDailyCalories] = useState(0);
   const [dailyProtein, setDailyProtein] = useState(0);
 
-  const { user } = useAppContext();
+  const [startDate, setStartDate] = useState(new Date());
 
-  const changeDate = (date) => {
-    console.log(date);
-  };
+  const { user } = useAppContext();
 
   const calculateInformation = () => {
     let tempCalories = 0;
     let tempProtein = 0;
-    log?.breakfast?.meals.forEach((meal) => {
-      tempCalories += meal.totalCalores;
-      tempProtein += meal.totalProtein;
-    });
-    log?.breakfast?.foods.forEach((food) => {
-      tempCalories += food.calories;
-      tempProtein += food.protein;
-    });
+    if (log !== undefined) {
+      for (const [key, value] of Object.entries(log)) {
+        value?.meals?.forEach((meal) => {
+          tempCalories += meal.totalCalories;
+          tempProtein += meal.totalProtein;
+        });
+        value?.foods?.forEach((food) => {
+          tempCalories += food.calories;
+          tempProtein += food.protein;
+        });
+      }
+    }
     setDailyCalories(tempCalories);
     setDailyProtein(tempProtein);
   };
@@ -35,12 +39,25 @@ export default function LogDisplay({ log }) {
     calculateInformation();
   }, [log]);
 
-  console.log(log);
+  useEffect(() => {
+    const year = startDate.getFullYear();
+    const month = String(startDate.getMonth() + 1).padStart(2, "0");
+    const day = String(startDate.getDate()).padStart(2, "0");
+    const formattedDate = `${month}/${day}/${year}`;
+    setLogDate(formattedDate);
+  }, [startDate]);
 
   return (
     <div className={styles.mainContainer}>
       <div className={styles.titleContainer}>
         <div className={styles.title}>Food Log</div>
+        <div>
+          <DatePicker
+            selected={startDate}
+            onChange={(date) => setStartDate(date)}
+            className={styles.datePicker}
+          />
+        </div>
       </div>
       <Row>
         <Col xs={6}>

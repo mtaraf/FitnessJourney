@@ -87,10 +87,7 @@ export default function Header() {
         <Col className="col-2">
           <div className={styles.profileButton}>
             {signIn ? (
-              <ProfileButton
-                picture={profilePictures[user.profilePicture]}
-                user={user}
-              />
+              <ProfileButton user={user} />
             ) : (
               <SignInButton setUser={setUser} />
             )}

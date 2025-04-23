@@ -42,7 +42,7 @@ export const AppProvider = ({ children }) => {
       }
     };
 
-    //fetchData();
+    fetchData();
     console.log(foodLog);
   }, []);
 

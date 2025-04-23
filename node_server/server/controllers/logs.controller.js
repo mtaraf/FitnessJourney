@@ -24,6 +24,7 @@ const updateLog = async (req, res) => {
   try {
     await Logs.syncIndexes();
     const { username } = req.params;
+    console.log(req.body);
     const log = await Logs.findOneAndUpdate({ username: username }, req.body);
 
     if (!log) {

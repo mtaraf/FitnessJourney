@@ -34,3 +34,20 @@
   height: 200px;
   width: 200px;
 }
+
+.datePicker {
+  border: 1px solid var(--dark-theme-border);
+  padding: 5px;
+  font-size: 16px;
+  color: var(--dark-theme-text);
+  background-color: var(--dark-theme-background);
+  cursor: pointer;
+}
+
+.datePicker:focus {
+  cursor: default;
+}
+
+.react-datepicker {
+  background-color: var(--dark-theme-background) !important;
+}

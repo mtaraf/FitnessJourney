@@ -15,6 +15,9 @@ export const updateLogs = async (username, data) => {
     const response = await axios.put(`/api/logs/${username}`, data);
     return response;
   } catch (error) {
-    throw error.response?.data?.message || "Error updating user log data";
+    throw (
+      ("Error updating user log data: ",
+      error.response?.data?.message || "Error updating user log data")
+    );
   }
 };
