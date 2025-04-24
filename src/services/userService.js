@@ -2,11 +2,7 @@ import axios from "axios";
 
 export const getUser = async (username) => {
   try {
-    const response = await axios.get("/api/users/", {
-      params: {
-        username: username,
-      },
-    });
+    const response = await axios.get(`/api/users/${username}`);
 
     return response;
   } catch (error) {

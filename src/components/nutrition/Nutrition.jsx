@@ -30,8 +30,8 @@ export default function Nutrition() {
   useEffect(() => {
     console.log("Food Log ", foodLog);
     console.log("Log Date: ", logDate);
-    setCurrentLog(foodLog.find((log) => log.date === logDate));
-  }, [foodLog, logDate]);
+    setCurrentLog(foodLog?.find((log) => log.date === logDate));
+  }, [foodLog]);
 
   useEffect(() => {
     console.log("Food Log ", foodLog);

@@ -16,7 +16,10 @@ const postLog = async (req, res) => {
     const log = await Logs.create(req.body);
     res.status(200).json(log);
   } catch (error) {
-    res.status(500).json({ message: error.message + req.body });
+    res.status(500).json({
+      message: error.message,
+      body: req.body,
+    });
   }
 };
 
@@ -33,7 +36,10 @@ const updateLog = async (req, res) => {
 
     res.status(200).json(log);
   } catch (error) {
-    res.status(500).json({ message: error.message + req.body });
+    res.status(500).json({
+      message: error.message,
+      body: req.body,
+    });
   }
 };
 

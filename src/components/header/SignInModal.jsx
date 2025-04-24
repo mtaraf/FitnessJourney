@@ -33,24 +33,20 @@ export default function SignInModal({ show, setShow }) {
   // Login Functionality
   const handleLogin = async (e) => {
     e.preventDefault();
-    const username = e.target.username.value;
-    const password = e.target.password.value;
-
-    const response = await getUser(e.target.username.value);
-    console.log(response);
+    const response = await getUser(loginUsername);
 
     if (response.status === 200) {
       // Login Successful
       const tempUser = {
         signedIn: true,
-        username: response.data[0].username,
-        workouts: response.data[0].workouts,
-        weeklyPlan: response.data[0].weeklyPlan,
-        goals: response.data[0].goals,
-        information: response.data[0].information,
+        username: response.data.username,
+        workouts: response.data.workouts,
+        weeklyPlan: response.data.weeklyPlan,
+        goals: response.data.goals,
+        information: response.data.information,
       };
       setUser(tempUser);
-      console.log(tempUser);
+      console.log("Successful Login by: ", tempUser);
       setLoginError(false);
       handleClose();
     } else {
@@ -132,6 +128,7 @@ export default function SignInModal({ show, setShow }) {
                   placeholder="Enter username"
                   name="username"
                   onChange={(e) => setLoginUsername(e.target.value)}
+                  value={loginUsername}
                 ></Form.Control>
               </Form.Group>
 
@@ -141,6 +138,7 @@ export default function SignInModal({ show, setShow }) {
                   placeholder="Enter password"
                   name="password"
                   onChange={(e) => setLoginPassword(e.target.value)}
+                  value={loginPassword}
                 ></Form.Control>
               </Form.Group>
 

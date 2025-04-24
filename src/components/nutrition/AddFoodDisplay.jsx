@@ -5,7 +5,10 @@ import LogItem from "./LogItem";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../AppContext";
 import { getUser } from "../../services/userService";
-import { updateUserNutrition } from "../../services/userNutritionService";
+import {
+  createUserNutrition,
+  updateUserNutrition,
+} from "../../services/userNutritionService";
 
 export default function AddFoodDisplay({ date }) {
   // Modal states
@@ -149,15 +152,51 @@ export default function AddFoodDisplay({ date }) {
       calories: Number(foodCalories),
       protein: Number(foodProtein),
     };
-    let updatedUserNutrition = userNutritionData;
 
-    updatedUserNutrition.foods = [...updatedUserNutrition.foods, newFood];
+    let updatedUserNutrition = {};
+    let response = {};
 
-    // API call to add data to user's nutrition information
-    const response = await updateUserNutrition(
-      user.username,
-      updatedUserNutrition
-    );
+    if (userNutritionData.foods === undefined) {
+      updatedUserNutrition = {
+        meals: [],
+        foods: [newFood],
+        favorites: [],
+      };
+      setUserNutritionData(updatedUserNutrition);
+
+      const data = {
+        username: user.username,
+        meals: updatedUserNutrition.meals,
+        foods: updatedUserNutrition.foods,
+        favorites: updatedUserNutrition.favorites,
+      };
+
+      // API call to create data to user's nutrition information
+      response = await createUserNutrition(data);
+    } else {
+      updatedUserNutrition = {
+        ...userNutritionData,
+        foods: [...userNutritionData.foods, newFood], // updating one key while copying others
+      };
+
+      console.log("Add food user data: ", updatedUserNutrition);
+
+      setUserNutritionData(updatedUserNutrition);
+
+      const data = {
+        username: user.username,
+        meals: updatedUserNutrition.meals,
+        foods: updatedUserNutrition.foods,
+        favorites: updatedUserNutrition.favorites,
+      };
+
+      // API call to create data to user's nutrition information
+      response = await updateUserNutrition(user.username, updatedUserNutrition);
+    }
+
+    console.log("Add food user data: ", updatedUserNutrition);
+
+    console.log("Add food api response: ", response);
 
     if (response.status !== 200) {
       // Add an error modal here eventually
@@ -192,9 +231,10 @@ export default function AddFoodDisplay({ date }) {
       totalProtein: totalProtein,
     };
 
-    let updatedUserNutrition = userNutritionData;
-
-    updatedUserNutrition.meals = [...updatedUserNutrition.meals, newMeal];
+    let updatedUserNutrition = {
+      ...userNutritionData,
+      meals: [...userNutritionData.meals, newMeal], // updating one key while copying others
+    };
 
     setUserNutritionData(updatedUserNutrition);
 
@@ -283,10 +323,14 @@ export default function AddFoodDisplay({ date }) {
       protein: Number(ingredientProtein),
     };
 
+    console.log(item);
+
     setIngredientName("");
     setIngredientProtein("");
     setIngredientCalories("");
     setIngredientList([...ingredientList, item]);
+
+    console.log(ingredientList);
   };
 
   const removeIngredient = (name) => {
@@ -321,7 +365,7 @@ export default function AddFoodDisplay({ date }) {
               onChange={(e) => setMealSearch(e.target.value)}
               value={mealSearch}
             />
-            {mealSearchList.map((meal, index) => (
+            {mealSearchList?.map((meal, index) => (
               <LogItem key={index} onClick={() => {}} meal={meal} date={date} />
             ))}
           </div>
@@ -344,7 +388,7 @@ export default function AddFoodDisplay({ date }) {
               onChange={(e) => setFoodSearch(e.target.value)}
               value={foodSearch}
             />
-            {foodSearchList.map((food, index) => (
+            {foodSearchList?.map((food, index) => (
               <LogItem key={index} onClick={() => {}} food={food} date={date} />
             ))}
           </div>
@@ -417,9 +461,7 @@ export default function AddFoodDisplay({ date }) {
               <LogItem
                 key={index}
                 onClick={() => removeIngredient(ingredient.name)}
-                name={ingredient.name}
-                calories={ingredient.calories}
-                protein={ingredient.protein}
+                food={ingredient}
                 subtractButton={true}
               />
             ))}

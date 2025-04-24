@@ -25,7 +25,10 @@ const postUser = async (req, res) => {
     const user = await Users.create(req.body);
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message + req.body });
+    res.status(500).json({
+      message: error.message,
+      body: req.body,
+    });
   }
 };
 
@@ -41,7 +44,10 @@ const updateUser = async (req, res) => {
 
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message + req.body });
+    res.status(500).json({
+      message: error.message,
+      body: req.body,
+    });
   }
 };
 

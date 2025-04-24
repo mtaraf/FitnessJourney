@@ -12,7 +12,6 @@ const LogsSchema = mongoose.Schema(
         date: {
           type: String,
           required: [true, "Please enter a date"],
-          unique: true,
         },
         breakfast: {
           meals: [],

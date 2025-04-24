@@ -46,6 +46,40 @@ export default function LogItem({
 
     // If no data for the current date, add new data to log
     if (updatedEntryIndex === -1) {
+      // Create new log entry object
+      const newlogEntry = {
+        date: date,
+        breakfast: {
+          foods: [],
+          meals: [],
+        },
+        lunch: { foods: [], meals: [] },
+        dinner: { foods: [], meals: [] },
+        everythingElse: { foods: [], meals: [] },
+      };
+
+      // add food to the correcty entry (breakfast, lunch, dinner, or everythingElse)
+      newlogEntry[entry].foods.push(food);
+
+      // add entry to updated food log
+      updatedFoodLog.push(newlogEntry);
+
+      // update the foodLog context
+      setFoodLog(updatedFoodLog);
+
+      // Send update to food log to backend
+      const data = {
+        username: user.username,
+        log: updatedFoodLog,
+      };
+      const response = updateLogs(user.username, data);
+
+      if (response.status !== 200) {
+        // Add error resolution here
+      }
+
+      console.log("Created new log entry: ", updatedFoodLog);
+
       return;
     } else {
       let entryToUpdate = { ...updatedFoodLog[updatedEntryIndex] };
@@ -80,8 +114,82 @@ export default function LogItem({
     }
   };
 
-  const logMeal = (meal) => {
-    console.log(meal);
+  const logMeal = (meal, entry) => {
+    // Copy food log
+    let updatedFoodLog = [...foodLog];
+
+    // Find and clone entry we want
+    //let updatedEntry = foodLog.find((log) => log.date === "04/19/2025");
+    let updatedEntryIndex = foodLog.findIndex((log) => log.date === date);
+
+    // If no data for the current date, add new data to log
+    if (updatedEntryIndex === -1) {
+      // Create new log entry object
+      const newlogEntry = {
+        date: date,
+        breakfast: {
+          foods: [],
+          meals: [],
+        },
+        lunch: { foods: [], meals: [] },
+        dinner: { foods: [], meals: [] },
+        everythingElse: { foods: [], meals: [] },
+      };
+
+      // add food to the correcty entry (breakfast, lunch, dinner, or everythingElse)
+      newlogEntry[entry].meals.push(meal);
+
+      // add entry to updated food log
+      updatedFoodLog.push(newlogEntry);
+
+      // update the foodLog context
+      setFoodLog(updatedFoodLog);
+
+      // Send update to food log to backend
+      const data = {
+        username: user.username,
+        log: updatedFoodLog,
+      };
+      const response = updateLogs(user.username, data);
+
+      if (response.status !== 200) {
+        // Add error resolution here
+      }
+
+      console.log("Created new log entry: ", updatedFoodLog);
+
+      return;
+    } else {
+      let entryToUpdate = { ...updatedFoodLog[updatedEntryIndex] };
+
+      // Clone food array to update
+      let updatedMealArray = [...(entryToUpdate[entry]?.meals || [])];
+      updatedMealArray.push(meal);
+
+      // update entry with new food array
+      entryToUpdate[entry] = {
+        ...entryToUpdate[entry],
+        meals: updatedMealArray,
+      };
+
+      // Replace the entry
+      updatedFoodLog[updatedEntryIndex] = entryToUpdate;
+
+      // Update state
+      setFoodLog(updatedFoodLog);
+      console.log("Updated Food Log: ", foodLog);
+
+      // Send update to food log to backend
+      const data = {
+        username: user.username,
+        log: updatedFoodLog,
+      };
+      const response = updateLogs(user.username, data);
+
+      if (response.status !== 200) {
+        // add error prompt here
+      }
+    }
   };
 
   return (
