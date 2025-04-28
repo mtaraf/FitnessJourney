@@ -41,7 +41,6 @@ export default function LogItem({
     let updatedFoodLog = [...foodLog];
 
     // Find and clone entry we want
-    //let updatedEntry = foodLog.find((log) => log.date === "04/19/2025");
     let updatedEntryIndex = foodLog.findIndex((log) => log.date === date);
 
     // If no data for the current date, add new data to log

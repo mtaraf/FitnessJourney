@@ -8,7 +8,7 @@ import "react-circular-progressbar/dist/styles.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default function LogDisplay({ log, setLogDate }) {
+export default function LogDisplay({ log, setLogDate, date }) {
   const [dailyCalories, setDailyCalories] = useState(0);
   const [dailyProtein, setDailyProtein] = useState(0);
 
@@ -65,21 +65,25 @@ export default function LogDisplay({ log, setLogDate }) {
             meals={log?.breakfast?.meals}
             foods={log?.breakfast?.foods}
             title={"Breakfast"}
+            date={date}
           />
           <MealDisplay
             meals={log?.lunch?.meals}
             foods={log?.lunch?.foods}
             title={"Lunch"}
+            date={date}
           />
           <MealDisplay
             meals={log?.dinner?.meals}
             foods={log?.dinner?.foods}
             title={"Dinner"}
+            date={date}
           />
           <MealDisplay
             meals={log?.everythingElse?.meals}
             foods={log?.everythingElse?.foods}
             title={"Everything else"}
+            date={date}
           />
         </Col>
         <Col xs={3}>

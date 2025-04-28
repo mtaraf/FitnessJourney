@@ -18,6 +18,11 @@
   justify-content: space-between;
 }
 
+.addContainer {
+  display: flex;
+  align-items: center;
+}
+
 .title {
   font-size: 20px;
 }
@@ -32,4 +37,51 @@
 
 .foodDetails {
   color: var(--dark-theme-subtext);
+}
+
+/* Offcanvas */
+.offcanvas {
+  background-color: var(--dark-theme-off-background);
+  color: var(--dark-theme-text);
+}
+
+.offcanvasTitle {
+  font-size: 30px;
+  border-bottom: 1px solid var(--dark-theme-border);
+  width: 95%;
+  padding: 5px;
+  margin: 20px auto;
+}
+
+/* Form */
+.formGroup {
+  margin: 10px 0;
+}
+
+.formControl {
+  border: 1px solid var(--dark-theme-border);
+  background-color: var(--dark-theme-input);
+  cursor: pointer;
+  color: var(--dark-theme-text);
+  margin: 10px 0;
+}
+
+.formControl:focus {
+  background-color: var(--dark-theme-input);
+  cursor: default;
+  color: var(--dark-theme-text);
+  box-shadow: none;
+}
+
+.formControl::placeholder {
+  color: var(--dark-theme-text);
+}
+
+.formButton {
+  margin: 30px 0px;
+  width: 20%;
+}
+
+.submitButton {
+  margin-top: 30px;
 }

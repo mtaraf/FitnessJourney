@@ -44,7 +44,11 @@ export default function Nutrition() {
       <Container fluid>
         <Row xs={12} className={`g-1 ${styles.content}`}>
           <Col xs={{ span: 10, offset: 1 }}>
-            <LogDisplay log={currentLog} setLogDate={setLogDate} />
+            <LogDisplay
+              log={currentLog}
+              setLogDate={setLogDate}
+              date={logDate}
+            />
           </Col>
           {/* <Col xs={2} className={styles.sideContainer}>
             <div className={styles.title}>Favorites</div>
