@@ -4,7 +4,6 @@ import CustomButton from "../general/CustomButton";
 import LogItem from "./LogItem";
 import { useEffect, useState } from "react";
 import { useAppContext } from "../AppContext";
-import { getUser } from "../../services/userService";
 import {
   createUserNutrition,
   updateUserNutrition,
@@ -179,8 +178,6 @@ export default function AddFoodDisplay({ date }) {
         foods: [...userNutritionData.foods, newFood], // updating one key while copying others
       };
 
-      console.log("Add food user data: ", updatedUserNutrition);
-
       setUserNutritionData(updatedUserNutrition);
 
       const data = {
@@ -193,8 +190,6 @@ export default function AddFoodDisplay({ date }) {
       // API call to create data to user's nutrition information
       response = await updateUserNutrition(user.username, updatedUserNutrition);
     }
-
-    console.log("Add food user data: ", updatedUserNutrition);
 
     console.log("Add food api response: ", response);
 
@@ -323,14 +318,10 @@ export default function AddFoodDisplay({ date }) {
       protein: Number(ingredientProtein),
     };
 
-    console.log(item);
-
     setIngredientName("");
     setIngredientProtein("");
     setIngredientCalories("");
     setIngredientList([...ingredientList, item]);
-
-    console.log(ingredientList);
   };
 
   const removeIngredient = (name) => {

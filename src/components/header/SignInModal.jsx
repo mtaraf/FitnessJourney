@@ -67,7 +67,12 @@ export default function SignInModal({ show, setShow }) {
       password: e.target.signUpPassword.value,
     };
 
+    // Create User
     const response = await createUser(newUser);
+
+    // Create User Nutrition Logs
+
+    // Create User Nutrition Data
 
     if (response.status === 200) {
       // User creation successfull

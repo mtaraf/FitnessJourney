@@ -1,4 +1,4 @@
-import { Button, Image } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import styles from "../../css/header/signInButton.module.css";
 import { useState } from "react";
 import SignInModal from "./SignInModal";
@@ -8,7 +8,6 @@ export default function SignInButton({ setUser }) {
 
   const handleClick = () => {
     setShow(true);
-    console.log("Sign-In button pressed");
   };
 
   return (

@@ -116,8 +116,6 @@ export default function MealDisplay({ title, meals, foods, date }) {
   };
 
   const addToLog = (food, entry) => {
-    console.log("added to log");
-
     // Copy food log
     let updatedFoodLog = [...foodLog];
 
@@ -157,8 +155,6 @@ export default function MealDisplay({ title, meals, foods, date }) {
       if (response.status !== 200) {
         // Add error resolution here
       }
-
-      console.log("Created new log entry: ", updatedFoodLog);
     } else {
       let entryToUpdate = { ...updatedFoodLog[updatedEntryIndex] };
 
@@ -177,7 +173,6 @@ export default function MealDisplay({ title, meals, foods, date }) {
 
       // Update state
       setFoodLog(updatedFoodLog);
-      console.log("Updated Food Log: ", foodLog);
 
       // Send update to food log to backend
       const data = {

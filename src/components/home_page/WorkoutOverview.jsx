@@ -1,14 +1,5 @@
-import {
-  Card,
-  Row,
-  Col,
-  Container,
-  Offcanvas,
-  ProgressBar,
-} from "react-bootstrap";
-import WorkoutCard from "./WorkoutCard";
+import { Card, Row, Col, Container, ProgressBar } from "react-bootstrap";
 import styles from "../../css/home_page/workoutOverview.module.css";
-import { useState } from "react";
 
 export default function WorkoutOverview({
   workoutTitle,

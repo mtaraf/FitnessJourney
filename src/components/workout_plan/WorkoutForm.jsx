@@ -22,7 +22,6 @@ export default function WorkoutForm({
   // To-Do: add error checking, check if values are empty
   const addExercise = (e) => {
     e.preventDefault();
-    console.log(e);
 
     // Check if Exercise name, sets, and reps are filled out
     if (
@@ -64,8 +63,6 @@ export default function WorkoutForm({
   const addWorkout = (e) => {
     // Set Workout Title
     setWorkoutName(e.target.form[0].value);
-    console.log(workoutName);
-    console.log(e.target.form[0].value);
 
     // Error checking
     if (!workoutName) {
@@ -96,21 +93,6 @@ export default function WorkoutForm({
     // resets error checking
     setValidWorkoutTitle(true);
     setValidWorkoutExercises(true);
-  };
-
-  const updateUserWorkouts = async (newList) => {
-    const updatedWorkouts = { workouts: newList };
-    try {
-      const response = await fetch(`${USERS_API_URL}/${user.username}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedWorkouts),
-      });
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   return (

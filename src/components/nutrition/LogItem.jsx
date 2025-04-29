@@ -1,4 +1,4 @@
-import { Button, Dropdown, DropdownButton } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import styles from "../../css/nutrition/logitem.module.css";
 import { AiOutlinePlusCircle, AiOutlineMinus } from "react-icons/ai";
 import { useAppContext } from "../AppContext";
@@ -77,8 +77,6 @@ export default function LogItem({
         // Add error resolution here
       }
 
-      console.log("Created new log entry: ", updatedFoodLog);
-
       return;
     } else {
       let entryToUpdate = { ...updatedFoodLog[updatedEntryIndex] };
@@ -98,7 +96,6 @@ export default function LogItem({
 
       // Update state
       setFoodLog(updatedFoodLog);
-      console.log("Updated Food Log: ", foodLog);
 
       // Send update to food log to backend
       const data = {

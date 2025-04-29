@@ -1,16 +1,10 @@
 import styles from "../../css/header/header.module.css";
-import { Row, Col, Container, Button, Image, Stack } from "react-bootstrap";
-import hamburgerMenuImage from "../../assets/hamburgerMenu.png";
+import { Row, Col, Container, Button } from "react-bootstrap";
 import icon from "../../assets/mainicon.jpg";
 import SignInButton from "./SignInButton";
 import { useEffect, useState } from "react";
-import defaultProfilePic from "../../assets/defaultProfilePic.png";
 import ProfileButton from "./ProfileButton";
-import homeIcon from "../../assets/homeIcon.png";
-import plan from "../../assets/journal.png";
-import cardio from "../../assets/cardio.png";
-import diet from "../../assets/diet.png";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { useAppContext } from "../AppContext";
 import { IoHomeOutline } from "react-icons/io5";
 import { FaDumbbell } from "react-icons/fa6";
@@ -22,14 +16,17 @@ export default function Header() {
   const { state, setState, user, setUser } = useAppContext();
   const navigate = useNavigate();
 
-  const profilePictures = [defaultProfilePic];
+  const location = useLocation();
 
   useEffect(() => {
     if (user.signedIn) {
-      console.log("CALLED");
       setSignIn(true);
     }
   }, [user.signedIn]);
+
+  useEffect(() => {
+    setState(location.pathname.slice(1));
+  });
 
   const navButtons = [
     { name: "Home", icon: <IoHomeOutline /> },

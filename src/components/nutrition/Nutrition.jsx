@@ -1,35 +1,17 @@
-import { Col, Container, Modal, Row } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 import { useAppContext } from "../AppContext";
 import styles from "../../css/nutrition/nutrition.module.css";
-import LogItem from "./LogItem";
 import LogDisplay from "./LogDisplay";
 import AddFoodDisplay from "./AddFoodDisplay";
 import { useEffect, useState } from "react";
-import { data } from "react-router";
 
 export default function Nutrition() {
   const [logDate, setLogDate] = useState("");
   const [currentLog, setCurrentLog] = useState({});
 
-  const [showLogModal, setShowLogModal] = useState(false);
-
-  const {
-    state,
-    setState,
-    user,
-    setUser,
-    foodLog,
-    setFoodLog,
-    userNutritionData,
-  } = useAppContext();
-
-  const addItem = () => {
-    console.log("Item Added");
-  };
+  const { foodLog } = useAppContext();
 
   useEffect(() => {
-    console.log("Food Log ", foodLog);
-    console.log("Log Date: ", logDate);
     setCurrentLog(foodLog?.find((log) => log.date === logDate));
   }, [foodLog]);
 

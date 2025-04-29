@@ -1,4 +1,4 @@
-import { Offcanvas, Card } from "react-bootstrap";
+import { Card } from "react-bootstrap";
 import styles from "../../css/home_page/workoutCard.module.css";
 import { useState } from "react";
 
@@ -11,7 +11,6 @@ export default function WorkoutCard({ day, title, body }) {
 
   function handleShow() {
     setShow(true);
-    console.log(show);
   }
 
   return (

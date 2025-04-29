@@ -8,14 +8,6 @@ export default function ProfileButton({ user }) {
 
   return (
     <div className={styles.container}>
-      {/* <Button
-        className={styles.button}
-        onClick={() => {
-          setShowProfile(true);
-        }}
-      >
-        <CgProfile style={{ width: "25px", height: "25px" }} />
-      </Button> */}
       <Dropdown>
         <Dropdown.Toggle className={styles.button}>
           <CgProfile style={{ width: "25px", height: "25px" }} />

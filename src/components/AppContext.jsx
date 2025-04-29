@@ -1,8 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
-import {
-  getUserNutrition,
-  updateUserNutrition,
-} from "../services/userNutritionService";
+import { getUserNutrition } from "../services/userNutritionService";
 import { getLogs } from "../services/logService";
 
 const AppContext = createContext();

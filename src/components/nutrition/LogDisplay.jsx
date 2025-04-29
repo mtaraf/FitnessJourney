@@ -1,4 +1,4 @@
-import { Col, ProgressBar, Row } from "react-bootstrap";
+import { Col, Row } from "react-bootstrap";
 import styles from "../../css/nutrition/logdisplay.module.css";
 import MealDisplay from "./MealDisplay";
 import { useEffect, useState } from "react";

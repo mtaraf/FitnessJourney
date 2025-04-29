@@ -1,6 +1,4 @@
-import { Button, Form, Modal } from "react-bootstrap";
 import styles from "../../css/workout_plan/calendarItem.module.css";
-import { useState } from "react";
 
 export default function CalendarItem({ day, date, title, exercises }) {
   return (

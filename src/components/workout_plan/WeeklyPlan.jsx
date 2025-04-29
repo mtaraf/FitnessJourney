@@ -46,8 +46,6 @@ export default function WeeklyPlan({ user, workoutList, changeWeeklyPlan }) {
 
   // Set workout for day of the week
   const addWorkoutToWeeklyPlan = (day) => {
-    console.log("workout added to weekly plan");
-
     // Set day of the week to change
     setEditDay(day);
 

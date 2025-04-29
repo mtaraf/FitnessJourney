@@ -1,10 +1,8 @@
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Container, Row } from "react-bootstrap";
 import WorkoutOverview from "./WorkoutOverview";
 import CardioOverview from "./CardioOverview";
 import NutritionOverview from "./NutritionOverview";
-import { useState } from "react";
 import { useAppContext } from "../AppContext";
-import { NavLink } from "react-router";
 
 export default function Home() {
   const { state, setState, user, setUser } = useAppContext();

@@ -30,30 +30,10 @@ export default function WorkoutPlan() {
 
   // change weekly plan of user
   const changeWeeklyPlan = (day, workout) => {
-    console.log(day);
-    console.log(workout);
     let tempUser = user;
     tempUser.weeklyPlan[day] = workout;
     setUser(tempUser);
-    console.log(user);
-
     updateWeeklyPlanData();
-  };
-
-  // update database with new weekly plan for user
-  const updateWeeklyPlanData = async () => {
-    const updatedWorkouts = { weeklyPlan: user.weeklyPlan };
-    try {
-      const response = await fetch(`${USERS_API_URL}/${user.username}`, {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedWorkouts),
-      });
-    } catch (error) {
-      console.log(error);
-    }
   };
 
   // populate workout list based on user data
@@ -63,7 +43,6 @@ export default function WorkoutPlan() {
     } else {
       setWorkoutList([]);
     }
-    console.log("Check Sign In for workout list");
   }, [user.signedIn]);
 
   return (
