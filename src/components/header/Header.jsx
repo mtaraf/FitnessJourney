@@ -1,6 +1,5 @@
 import styles from "../../css/header/header.module.css";
 import { Row, Col, Container, Button } from "react-bootstrap";
-import icon from "../../assets/mainicon.jpg";
 import SignInButton from "./SignInButton";
 import { useEffect, useState } from "react";
 import ProfileButton from "./ProfileButton";
@@ -46,7 +45,6 @@ export default function Header() {
                 setState("home");
               }}
             >
-              <img src={icon} className={styles.icon}></img>
               Journey
             </Button>
           </div>

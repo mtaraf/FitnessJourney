@@ -1,16 +1,24 @@
 import { useEffect, useState } from "react";
 import styles from "../../css/nutrition/mealdisplay.module.css";
-import { AiOutlinePlusCircle } from "react-icons/ai";
-import { Form, Offcanvas } from "react-bootstrap";
+import { AiOutlinePlusCircle, AiOutlineMinus } from "react-icons/ai";
+import { Form, Offcanvas, Modal } from "react-bootstrap";
 import CustomButton from "../general/CustomButton";
 import { useAppContext } from "../AppContext";
 import { updateLogs } from "../../services/logService";
 
 export default function MealDisplay({ title, meals, foods, date }) {
+  // Modal states
+  const [show, setShow] = useState(false);
+
+  // Log Removal States
+  const [isMeal, setIsMeal] = useState(false);
+  const [removalEntry, setRemovalEntry] = useState();
+  const [removalEntryMeal, setRemovalEntryMeal] = useState("");
+
   const [totalCalories, setTotalCalories] = useState(0);
   const [totalProtein, setTotalProtein] = useState(0);
 
-  // Modal states
+  // Offcanvas states
   const [foodName, setFoodName] = useState("");
   const [foodCalories, setFoodCalories] = useState("");
   const [foodProtein, setFoodProtein] = useState("");
@@ -192,6 +200,80 @@ export default function MealDisplay({ title, meals, foods, date }) {
     setFoodName("");
   };
 
+  const removeFromLog = () => {
+    // Copy food log
+    let updatedFoodLog = [...foodLog];
+
+    // Find and clone entry we want
+    let updatedEntryIndex = foodLog.findIndex((log) => log.date === date);
+
+    // Get Log Entry
+    let entryToUpdate = { ...updatedFoodLog[updatedEntryIndex] };
+
+    if (isMeal) {
+      // Clone meal array to update
+      let updatedMealArray = [
+        ...(entryToUpdate[removalEntryMeal]?.meals || []),
+      ];
+      const finalMealArray = updatedMealArray.filter(
+        (meal) => meal.title !== removalEntry.title
+      );
+
+      // Update entry
+      entryToUpdate[removalEntryMeal] = {
+        ...entryToUpdate[removalEntryMeal],
+        meals: finalMealArray,
+      };
+
+      // Replace the entry
+      updatedFoodLog[updatedEntryIndex] = entryToUpdate;
+
+      // Update state
+      setFoodLog(updatedFoodLog);
+    } else {
+      // Clone food array to update
+      let updatedFoodArray = [
+        ...(entryToUpdate[removalEntryMeal]?.foods || []),
+      ];
+      const finalFoodArray = updatedFoodArray.filter(
+        (food) => food.name !== removalEntry.name
+      );
+
+      // Update entry
+      entryToUpdate[removalEntryMeal] = {
+        ...entryToUpdate[removalEntryMeal],
+        foods: finalFoodArray,
+      };
+
+      // Replace the entry
+      updatedFoodLog[updatedEntryIndex] = entryToUpdate;
+
+      // Update state
+      setFoodLog(updatedFoodLog);
+    }
+
+    console.log("After Removal: ", updatedFoodLog);
+
+    // Send update to food log to backend
+
+    // Update Modal States
+    cancelModal();
+  };
+
+  const showModal = (isMeal, entry, entryMeal) => {
+    setIsMeal(isMeal);
+    setRemovalEntry(entry);
+    setRemovalEntryMeal(entryMeal);
+    setShow(true);
+  };
+
+  const cancelModal = () => {
+    setIsMeal(false);
+    setRemovalEntry({});
+    setRemovalEntryMeal("");
+    setShow(false);
+  };
+
   return (
     <>
       <div className={styles.mainContainer}>
@@ -211,17 +293,31 @@ export default function MealDisplay({ title, meals, foods, date }) {
         </div>
         {meals?.map((meal, index) => (
           <div key={index} className={styles.foodContainer}>
-            <div className={styles.foodTitle}>{meal.title}</div>
-            <div className={styles.foodDetails}>
-              {meal.totalCalories} Cal, {meal.totalProtein}g Protein
+            <AiOutlineMinus
+              size={25}
+              onClick={() => showModal(true, meal, title.toLowerCase())}
+              style={{ cursor: "pointer" }}
+            />
+            <div>
+              <div className={styles.foodTitle}>{meal.title}</div>
+              <div className={styles.foodDetails}>
+                {meal.totalCalories} Cal, {meal.totalProtein}g Protein
+              </div>
             </div>
           </div>
         ))}
         {foods?.map((food, index) => (
           <div key={index} className={styles.foodContainer}>
-            <div className={styles.foodTitle}>{food.name}</div>
-            <div className={styles.foodDetails}>
-              {food.calories} Cal, {food.protein}g Protein
+            <AiOutlineMinus
+              size={25}
+              onClick={() => showModal(false, food, title.toLowerCase())}
+              style={{ cursor: "pointer" }}
+            />
+            <div>
+              <div className={styles.foodTitle}>{food.name}</div>
+              <div className={styles.foodDetails}>
+                {food.calories} Cal, {food.protein}g Protein
+              </div>
             </div>
           </div>
         ))}
@@ -280,6 +376,16 @@ export default function MealDisplay({ title, meals, foods, date }) {
           </Form>
         </Offcanvas.Body>
       </Offcanvas>
+
+      <Modal show={show} onHide={() => cancelModal()} className={styles.modal}>
+        <Modal.Header closeButton className={styles.modalTitle}>
+          <Modal.Title>Remove from log?</Modal.Title>
+        </Modal.Header>
+        <Modal.Footer className={styles.modalFooter}>
+          <CustomButton label={"Confirm"} onclick={() => removeFromLog()} />
+          <CustomButton label={"Cancel"} onclick={() => cancelModal()} />
+        </Modal.Footer>
+      </Modal>
     </>
   );
 }

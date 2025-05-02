@@ -29,6 +29,9 @@
 
 .foodContainer {
   padding: 10px 0;
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
 
 .foodTitle {
@@ -84,4 +87,22 @@
 
 .submitButton {
   margin-top: 30px;
+}
+
+/* Modal */
+.modal {
+  width: 20%;
+  margin-left: 40%;
+}
+
+.modalTitle {
+  background-color: var(--dark-theme-off-background);
+  color: var(--dark-theme-subtext);
+  border: 1px solid var(--dark-theme-off-background);
+}
+
+.modalFooter {
+  background-color: var(--dark-theme-off-background);
+  color: var(--dark-theme-subtext);
+  border: 1px solid var(--dark-theme-off-background);
 }
